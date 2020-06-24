@@ -38,8 +38,8 @@ public class GameView extends View {
     public GameView(Context context) {
         super(context);
 
-        thePlayer[0] = BitmapFactory.decodeResource(getResources(), R.drawable.dodobird1);
-        thePlayer[1] = BitmapFactory.decodeResource(getResources(), R.drawable.dodobird2);
+        thePlayer[0] = BitmapFactory.decodeResource(getResources(), R.drawable.dodobird1small);
+        thePlayer[1] = BitmapFactory.decodeResource(getResources(), R.drawable.dodobird2small);
 
         bgImage = BitmapFactory.decodeResource(getResources(), R.drawable.map_startmain);
 
@@ -67,12 +67,8 @@ public class GameView extends View {
 
         //Player
         int minPlayerY = thePlayer[0].getHeight() - 100;
-        int maxPlayerY = canvasHeight - thePlayer[0].getHeight() * (8/3) ;
-
-
-        canvas.drawBitmap(spike1,0,0,null);
-        canvas.drawBitmap(spike2,0,0,null);
-
+        int maxPlayerY = canvasHeight - thePlayer[0].getHeight() * 4 ;
+        
         thePlayerY += thePlayerSpeed;
         if(thePlayerY < minPlayerY){ thePlayerY = minPlayerY;}
         if(thePlayerY > maxPlayerY){ thePlayerY = maxPlayerY;}
