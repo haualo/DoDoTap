@@ -20,11 +20,14 @@ import java.util.TimerTask;
 public class testingGame extends AppCompatActivity {
 
     private TextView scoreLabel;
+    private TextView tapLabel;
 
     private ImageView thePlayer1;
     private ImageView thePlayer2;
     private ImageView spikeSmall;
-    private ImageView spikeMedium;
+    private ImageView bigThree;
+    private ImageView mediumThree;
+    private ImageView smallThree;
 
     //Size
     private int screenHeight, screenWidth;
@@ -32,8 +35,14 @@ public class testingGame extends AppCompatActivity {
     private int playerSize;
 
     //position
-    private float thePlayerY;
+    private float thePlayerX=10,thePlayerY;
     private float spikeSmallX, spikeSmallY;
+    private float bigThreeX,bigThreeY=650;
+    private float mediumThreeX,mediumThreeY=800;
+    private float smallThreeX,smallThreeY=900;
+
+    //score
+    private int score;
 
     //Timer
     private Timer timer = new Timer();
@@ -49,12 +58,15 @@ public class testingGame extends AppCompatActivity {
         setContentView(R.layout.activity_testing_game);
 
         scoreLabel = (TextView) findViewById(R.id.scoreText);
+        tapLabel = (TextView) findViewById(R.id.tapStart);
 
         thePlayer1 = (ImageView) findViewById(R.id.player1);
         thePlayer2 = (ImageView) findViewById(R.id.player2);
 
         spikeSmall = (ImageView) findViewById(R.id.smallSpike);
-        spikeMedium = (ImageView) findViewById(R.id.mediumSpike);
+        bigThree = (ImageView) findViewById(R.id.three1);
+        mediumThree = (ImageView) findViewById(R.id.three2);
+        smallThree = (ImageView) findViewById(R.id.three3);
 
         //Screen Size
         WindowManager windowManager = getWindowManager();
@@ -65,18 +77,51 @@ public class testingGame extends AppCompatActivity {
         screenHeight = size.y;
 
 
-        //move out of screen
-        spikeSmall.setX(-100.0f);
-        spikeSmall.setY(-500.0f);
-        spikeMedium.setX(-300.0f);
-        spikeMedium.setY(-300.0f);
+        //move out of screen/start pos
+        spikeSmallX = -250;
+        bigThreeX = -250;
+        bigThree.setY(bigThreeY);
+        mediumThreeX = -250;
+        mediumThree.setY(mediumThreeY);
+        smallThreeX = -250;
+        smallThree.setY(smallThreeY);
 
+        thePlayer1.setX(thePlayerX);
+        scoreLabel.setText("Score: " + score);
     }
 
 
     public void changePos(){
 
-        spikeSmallX -= 12;
+        hitCheck();
+
+        bigThreeX -= 12;
+        if(bigThreeX < -300 ){
+            bigThreeX = 1400;
+            bigThreeY = (int) Math.floor(Math.random() * (1000 - 650)) + 650;
+        }
+        bigThree.setX(bigThreeX);
+        bigThree.setY(bigThreeY);
+
+        mediumThreeX -= 12;
+        if(mediumThreeX < -300 ){
+            mediumThreeX = 1900;
+            mediumThreeY = (int) Math.floor(Math.random() * (950 - 800)) + 800;
+        }
+        mediumThree.setX(mediumThreeX);
+        mediumThree.setY(mediumThreeY);
+
+        smallThreeX -= 12;
+        if(smallThreeX < -300 ){
+            smallThreeX = 2400;
+            smallThreeY = (int) Math.floor(Math.random() * (900 - 1000)) + 1000;
+        }
+        smallThree.setX(smallThreeX);
+        smallThree.setY(smallThreeY);
+
+
+
+        spikeSmallX -= 30;
         if(spikeSmallX < -200){
             spikeSmallX = 1200;
             spikeSmallY = (int) Math.floor(Math.random() * ((1270) - 300)) + 300;
@@ -88,19 +133,60 @@ public class testingGame extends AppCompatActivity {
 
         if(thePlayerY < 300){
             thePlayerY=300;
+            thePlayerY +=30;
         }
         if(thePlayerY > 1270){
             thePlayerY = 1270;
         }
         thePlayer1.setY(thePlayerY);
         thePlayer2.setY(thePlayerY);
-        Log.d("playerY", " thePlayer.getHeight():  " +  spikeSmallX);
+
+        scoreLabel.setText("Score: " + score);
+
+        Log.d("bigThreeY", " bigThreeY:  " +  bigThreeY);
+        Log.d("bigThreeY", " thePlayerY:  " +  thePlayerY);
+    }
+
+    public void hitCheck(){
+
+        //SpikeCenter
+        float spikeCenterX = spikeSmallX + spikeSmall.getWidth() / 2.0f;
+        float spikeCenterY = spikeSmallY + spikeSmall.getHeight() / 2.0f;
+
+        //spike
+        if( 0 <= spikeCenterX && spikeCenterX <= playerSize && thePlayerY <= spikeCenterY && spikeCenterY <= thePlayerY+playerSize){
+            spikeSmallX = -200.0f;
+            score +=10;
+        }
+
+        //big three
+        if(thePlayerY > bigThreeY && bigThreeX <= thePlayerX+100 && thePlayerX < bigThreeX+100){
+            bigThreeX = -200.0f;
+            score += 50;
+        }
+
+        //medium three
+        if(thePlayerY > mediumThreeY && mediumThreeX <= thePlayerX+100 && thePlayerX < mediumThreeX+100){
+            mediumThreeX = -200.0f;
+            score += 50;
+        }
+
+        //small three
+        if(thePlayerY > smallThreeY && smallThreeX <= thePlayerX+100 && thePlayerX < smallThreeX+100){
+            smallThreeX = -200.0f;
+            score += 50;
+        }
+
     }
 
     public boolean onTouchEvent(MotionEvent event) {
 
         if(!start_flg){
             start_flg = true;
+            tapLabel.setVisibility(View.GONE);
+            bigThree.setVisibility(View.VISIBLE);
+            mediumThree.setVisibility(View.VISIBLE);
+            smallThree.setVisibility(View.VISIBLE);
 
             //FrameHeight
             FrameLayout frameLayout = findViewById(R.id.frame);
