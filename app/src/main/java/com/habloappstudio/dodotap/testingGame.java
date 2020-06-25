@@ -1,7 +1,9 @@
 package com.habloappstudio.dodotap;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -178,6 +180,7 @@ public class testingGame extends AppCompatActivity {
         }
 
     }
+
 
     public boolean onTouchEvent(MotionEvent event) {
 
