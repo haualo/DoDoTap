@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".testingGame"
+    android:background="@drawable/backgroundnew"
+    android:orientation="vertical">
+
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/banner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="SMART_BANNER"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <ImageView
+            android:id="@+id/smallSpike"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/spikesmall" />
+
+        <ImageView
+            android:id="@+id/mediumSpike"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            app:srcCompat="@drawable/spikemedium" />
+
+        <ImageView
+            android:id="@+id/player1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/dodobird1small"
+            android:layout_gravity="center_vertical"/>
+
+        <ImageView
+            android:id="@+id/player2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/dodobird2small"
+            android:visibility="invisible"
+            android:layout_gravity="center_vertical"/>
+
+
+    </FrameLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: 0"
+        android:textSize="35sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
+</RelativeLayout>

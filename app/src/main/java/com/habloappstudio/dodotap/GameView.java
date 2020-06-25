@@ -27,10 +27,15 @@ public class GameView extends View {
     private Bitmap bgImage;
 
     //spike
-    private Bitmap spike1, spike2;
+    private Bitmap spikeSmall, spikeMedium, spikeBig;
+
+    private int spikeSmallX, spikeSmallY, spikeSmallSpeed = 10;
+    private int spikeMediumX, spikeMediumY, spikeMediumSpeed = 10;
+
 
     //score
     private Paint scorePaint = new Paint();
+    private int score;
 
     //status check
     private boolean touch_flg = false;
@@ -41,10 +46,11 @@ public class GameView extends View {
         thePlayer[0] = BitmapFactory.decodeResource(getResources(), R.drawable.dodobird1small);
         thePlayer[1] = BitmapFactory.decodeResource(getResources(), R.drawable.dodobird2small);
 
-        bgImage = BitmapFactory.decodeResource(getResources(), R.drawable.map_startmain);
+        bgImage = BitmapFactory.decodeResource(getResources(), R.drawable.backgroundnew);
 
-        spike1 = BitmapFactory.decodeResource(getResources(), R.drawable.spike1);
-        spike2 = BitmapFactory.decodeResource(getResources(), R.drawable.spike2);
+        spikeSmall = BitmapFactory.decodeResource(getResources(), R.drawable.spikesmall);
+        spikeMedium = BitmapFactory.decodeResource(getResources(), R.drawable.spikemedium);
+        spikeBig = BitmapFactory.decodeResource(getResources(), R.drawable.spikebig);
 
         scorePaint.setColor(Color.BLACK);
         scorePaint.setTextSize(75);
@@ -53,6 +59,9 @@ public class GameView extends View {
 
         //First position
         thePlayerY = 500;
+        spikeSmallX = 1000;
+        spikeMediumX = 1500;
+        score=0;
     }
 
     @Override
@@ -61,12 +70,12 @@ public class GameView extends View {
         canvasHeight = canvas.getHeight();
 
 
-        canvas.drawBitmap(bgImage,0,50,null);
+        canvas.drawBitmap(bgImage,0,0,null);
 
 
 
         //Player
-        int minPlayerY = thePlayer[0].getHeight() - 100;
+        int minPlayerY = thePlayer[0].getHeight() + 20;
         int maxPlayerY = canvasHeight - thePlayer[0].getHeight() * 4 ;
         
         thePlayerY += thePlayerSpeed;
@@ -82,9 +91,42 @@ public class GameView extends View {
         }
 
 
-        canvas.drawText("Score: 0",20, 60, scorePaint );
+        //small spike
+        spikeSmallX -= spikeSmallSpeed;
+
+        if(hitCheck(spikeSmallX, spikeSmallY)){
+            score+=10;
+            spikeSmallX = -700;
+
+        }
+
+        if(spikeSmallX < -600){
+            spikeSmallX = canvasHeight + 30;
+            spikeSmallY = (int) Math.floor(Math.random() * ((maxPlayerY-300) - minPlayerY)) + minPlayerY;
+        }
+        canvas.drawBitmap(spikeSmall,spikeSmallX,spikeSmallY,null);
+
+
+        //big spike
+        spikeMediumY = maxPlayerY-545;
+        spikeMediumX -= spikeMediumSpeed;
+        if(spikeMediumX < -600){
+            spikeMediumX = canvasWidth + 20;
+        }
+        canvas.drawBitmap(spikeMedium,spikeMediumX,spikeMediumY,null);
+
+        canvas.drawText("Score: " + score,20, 60, scorePaint );
 
     }
+
+    public  boolean hitCheck(int x, int y){
+
+        if(thePlayerX < x && x+150 < (thePlayerX + thePlayer[0].getWidth()) && thePlayerY < y+50 && y+50 < (thePlayerY + thePlayer[0].getHeight())){
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
