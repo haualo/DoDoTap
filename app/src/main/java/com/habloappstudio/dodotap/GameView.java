@@ -49,8 +49,6 @@ public class GameView extends View {
         bgImage = BitmapFactory.decodeResource(getResources(), R.drawable.backgroundnew);
 
         spikeSmall = BitmapFactory.decodeResource(getResources(), R.drawable.spikesmall);
-        spikeMedium = BitmapFactory.decodeResource(getResources(), R.drawable.spikemedium);
-        spikeBig = BitmapFactory.decodeResource(getResources(), R.drawable.spikebig);
 
         scorePaint.setColor(Color.BLACK);
         scorePaint.setTextSize(75);

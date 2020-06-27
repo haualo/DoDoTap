@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".testingGame"
-    android:background="@drawable/backgroundnew2"
+    android:background="@drawable/backgroundnew3"
     android:orientation="vertical">
 
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/banner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         app:adSize="SMART_BANNER"
@@ -44,14 +44,19 @@
             android:visibility="invisible"
             android:layout_gravity="center_vertical"/>
 
+        <ImageView
+            android:id="@+id/crystalP"
+            android:layout_width="38dp"
+            android:layout_height="46dp"
+            android:src="@drawable/crystal" />
+
         <TextView
             android:id="@+id/tapStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="TAP TAP"
-            android:layout_marginTop="300sp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="150sp"
+            android:text="TAP TAP"
             android:textColor="@color/colorPrimary"
             android:textSize="70sp"
             android:textStyle="bold" />

@@ -17,6 +17,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,6 +35,10 @@ public class testingGame extends AppCompatActivity {
     private ImageView bigThree;
     private ImageView mediumThree;
     private ImageView smallThree;
+    private ImageView crystal;
+
+    //bannerAd
+    private AdView myAdView;
 
     //Size
     private int screenHeight, screenWidth;
@@ -43,6 +51,7 @@ public class testingGame extends AppCompatActivity {
     private float bigThreeX,bigThreeY=650;
     private float mediumThreeX,mediumThreeY=800;
     private float smallThreeX,smallThreeY=900;
+    private float crystalX, crystalY;
 
     //score
     private int score;
@@ -62,6 +71,14 @@ public class testingGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing_game);
 
+
+        //bannerAD code
+
+        myAdView = findViewById(R.id.banner1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        myAdView.loadAd(adRequest);
+
+
         scoreLabel = (TextView) findViewById(R.id.scoreText);
         tapLabel = (TextView) findViewById(R.id.tapStart);
 
@@ -72,6 +89,7 @@ public class testingGame extends AppCompatActivity {
         bigThree = (ImageView) findViewById(R.id.three1);
         mediumThree = (ImageView) findViewById(R.id.three2);
         smallThree = (ImageView) findViewById(R.id.three3);
+        crystal = (ImageView) findViewById(R.id.crystalP);
 
         //Screen Size
         WindowManager windowManager = getWindowManager();
@@ -81,6 +99,8 @@ public class testingGame extends AppCompatActivity {
         screenWidth = size.x;
         screenHeight = size.y;
 
+        //the score back if continue is pressed in gameOver screen/pop
+        score = getIntent().getIntExtra("SCORE", 0);
 
         //move out of screen/start pos
         spikeSmallX = -250;
@@ -91,6 +111,7 @@ public class testingGame extends AppCompatActivity {
         smallThreeX = -250;
         smallThree.setY(smallThreeY);
 
+        crystalX = -250;
         thePlayer1.setX(thePlayerX);
         scoreLabel.setText("Score: " + score);
     }
@@ -102,12 +123,13 @@ public class testingGame extends AppCompatActivity {
 
         if(stopMovements){
             thePlayerY -= 11;
-            smallThreeX += 12;
-            mediumThreeX += 12;
-            bigThreeX += 12;
+            smallThreeX += 5;
+            mediumThreeX += 5;
+            bigThreeX += 5;
             spikeSmallX += 30;
+            crystalX += 15;
         }else{
-            bigThreeX -= 12;
+            bigThreeX -= 5;
             if(bigThreeX < -300 ){
                 bigThreeX = 1400;
                 bigThreeY = (int) Math.floor(Math.random() * (1000 - 650)) + 650;
@@ -115,7 +137,7 @@ public class testingGame extends AppCompatActivity {
             bigThree.setX(bigThreeX);
             bigThree.setY(bigThreeY);
 
-            mediumThreeX -= 12;
+            mediumThreeX -= 5;
             if(mediumThreeX < -300 ){
                 mediumThreeX = 1900;
                 mediumThreeY = (int) Math.floor(Math.random() * (950 - 800)) + 800;
@@ -123,7 +145,7 @@ public class testingGame extends AppCompatActivity {
             mediumThree.setX(mediumThreeX);
             mediumThree.setY(mediumThreeY);
 
-            smallThreeX -= 12;
+            smallThreeX -= 5;
             if(smallThreeX < -300 ){
                 smallThreeX = 2400;
                 smallThreeY = (int) Math.floor(Math.random() * (900 - 1000)) + 1000;
@@ -132,6 +154,13 @@ public class testingGame extends AppCompatActivity {
             smallThree.setY(smallThreeY);
 
 
+            crystalX -=15;
+            if(crystalX < -200){
+                crystalX = 1500;
+                crystalY = (int) Math.floor(Math.random() * ((1270) - 300)) + 300;
+            }
+            crystal.setX(crystalX);
+            crystal.setY(crystalY);
 
             spikeSmallX -= 30;
             if(spikeSmallX < -200){
@@ -174,28 +203,43 @@ public class testingGame extends AppCompatActivity {
             gameOver();
         }
 
+        //crystal
+        float crystalCenterX = crystalX + crystal.getWidth() / 2.0f;
+        float crystalCenterY = crystalY + crystal.getHeight() / 2.0f;
+
+        //spike
+        if( 0 <= crystalCenterX && crystalCenterX <= playerSize && thePlayerY <= crystalCenterY && crystalCenterY <= thePlayerY+playerSize){
+            crystalX = 1500;
+            score +=10;
+        }
         //big three
         if(thePlayerY > bigThreeY && bigThreeX <= thePlayerX+100 && thePlayerX < bigThreeX+100){
-            stopMovements = true;
             gameOver();
         }
 
         //medium three
         if(thePlayerY > mediumThreeY && mediumThreeX <= thePlayerX+100 && thePlayerX < mediumThreeX+100){
-            stopMovements = true;
             gameOver();
         }
 
         //small three
         if(thePlayerY > smallThreeY && smallThreeX <= thePlayerX+100 && thePlayerX < smallThreeX+100){
-            stopMovements = true;
             gameOver();
         }
 
     }
 
     public void gameOver(){
-        startActivity(new Intent(testingGame.this, testingGamePopUp.class));
+        if(timer != null){
+            timer.cancel();
+            timer = null;
+        }
+
+        stopMovements = true;
+        //startActivity(new Intent(testingGame.this, testingGamePopUp.class));
+        Intent intent = new Intent(getApplicationContext(), testingGamePopUp.class);
+        intent.putExtra("SCORE", score);
+        startActivity(intent);
     }
 
 
