@@ -5,7 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:background="@drawable/mainmenu"
     >
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DoDoTap"
+        android:textSize="80sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
 
     <Button
         android:id="@+id/button"
@@ -14,7 +27,7 @@
         android:text="Play"
         android:textSize="30sp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/text1"
         android:textStyle="bold"
         android:onClick="startGame"
 

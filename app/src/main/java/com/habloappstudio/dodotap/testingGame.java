@@ -3,9 +3,11 @@ package com.habloappstudio.dodotap;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -25,6 +27,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class testingGame extends AppCompatActivity {
+
+    //sound
+
 
     private TextView scoreLabel;
     private TextView tapLabel;
@@ -78,8 +83,7 @@ public class testingGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing_game);
 
-
-        //bannerAD code
+        //bannerAD code*
         myAdView = findViewById(R.id.banner1);
         AdRequest adRequest = new AdRequest.Builder().build();
         myAdView.loadAd(adRequest);
@@ -148,6 +152,9 @@ public class testingGame extends AppCompatActivity {
             bigThreeX += 12;
             spikeSmallX += 30;
             crystalX += 15;
+            cloud1X += 5;
+            cloud2X +=5;
+            cloud3X +=5;
         }else{
             bigThreeX -= 12;
             if(bigThreeX < -300 ){
@@ -234,7 +241,7 @@ public class testingGame extends AppCompatActivity {
         scoreLabel.setText("Score: " + score);
 
         //Log.d("bigThreeY", " bigThreeY:  " +  bigThreeY);
-        Log.d("plauerY", " PlayerY:  " +  thePlayerY);
+        //Log.d("plauerY", " PlayerY:  " +  thePlayerY);
     }
 
     public void hitCheck(){
@@ -245,7 +252,8 @@ public class testingGame extends AppCompatActivity {
 
         //spike
         if( 0 <= spikeCenterX && spikeCenterX <= playerSize && thePlayerY <= spikeCenterY && spikeCenterY <= thePlayerY+playerSize){
-            //gameOver();
+            gameOver();
+            soundMix(4);
         }
 
         //crystal
@@ -256,25 +264,30 @@ public class testingGame extends AppCompatActivity {
         if( 0 <= crystalCenterX && crystalCenterX <= playerSize && thePlayerY <= crystalCenterY && crystalCenterY <= thePlayerY+playerSize){
             crystalX = 1500;
             score +=10;
+            soundMix(2);
         }
         //big three
         if(thePlayerY > bigThreeY && bigThreeX <= thePlayerX+100 && thePlayerX < bigThreeX+100){
-           // gameOver();
+            gameOver();
+            soundMix(3);
         }
 
         //medium three
         if(thePlayerY > mediumThreeY && mediumThreeX <= thePlayerX+100 && thePlayerX < mediumThreeX+100){
-            //gameOver();
+            gameOver();
+            soundMix(3);
         }
 
         //small three
         if(thePlayerY > smallThreeY && smallThreeX <= thePlayerX+100 && thePlayerX < smallThreeX+100){
-            //gameOver();
+            gameOver();
+            soundMix(3);
         }
 
     }
 
     public void gameOver(){
+
         if(timer != null){
             timer.cancel();
             timer = null;
@@ -282,14 +295,32 @@ public class testingGame extends AppCompatActivity {
         thePlayer1.setVisibility(View.GONE);
         thePlayer2.setVisibility(View.GONE);
         thePlayer3.setVisibility(View.VISIBLE);
-
         stopMovements = true;
-        //startActivity(new Intent(testingGame.this, testingGamePopUp.class));
         Intent intent = new Intent(getApplicationContext(), testingGamePopUp.class);
         intent.putExtra("SCORE", score);
         startActivity(intent);
     }
 
+
+    public void soundMix(int x){
+        final MediaPlayer tapScreen = MediaPlayer.create(this, R.raw.sfx_wing);
+        final MediaPlayer getPoint = MediaPlayer.create(this, R.raw.sfx_point);
+        final MediaPlayer hitThree = MediaPlayer.create(this, R.raw.sfx_die);
+        final MediaPlayer hitSpike = MediaPlayer.create(this, R.raw.sfx_hit);
+
+        switch (x){
+            case 1: tapScreen.start();break;
+            case 2: getPoint.start(); break;
+            case 3: hitThree.start(); break;
+            case 4: hitSpike.start(); break;
+            default:tapScreen.stop(); getPoint.stop(); hitThree.stop(); hitSpike.stop();
+
+
+        }
+
+
+
+    }
 
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -326,6 +357,8 @@ public class testingGame extends AppCompatActivity {
             action_flg = true;
             thePlayer1.setVisibility(View.INVISIBLE);
             thePlayer2.setVisibility(View.VISIBLE);
+            soundMix(1);
+
         }else{
 
             action_flg = false;
