@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="OK"
         android:layout_centerVertical="true"
-        android:layout_marginStart="10dp"
+        android:layout_centerHorizontal="true"
         tools:layout_editor_absoluteX="51dp"
         tools:layout_editor_absoluteY="545dp"
         android:onClick="mainMenu"/>
@@ -25,8 +25,9 @@
         android:layout_height="wrap_content"
         android:text="Continue?"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/oKButton"
-        android:layout_marginLeft="230dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/oKButton"
+        android:layout_marginLeft="100dp"
         tools:layout_editor_absoluteX="242dp"
         tools:layout_editor_absoluteY="547dp"
         android:onClick="viewAd"/>
@@ -41,7 +42,6 @@
         android:textColor="@color/colorPrimary"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/oKButton"
-
         tools:layout_editor_absoluteX="163dp"
         tools:layout_editor_absoluteY="367dp" />
     <TextView
@@ -52,15 +52,8 @@
         android:textSize="32sp"
         android:textColor="@color/Black"
         android:textStyle="bold"
-        android:layout_below="@+id/dodoBird"
+        android:layout_below="@+id/replayButton"
         android:layout_centerHorizontal="true"
         />
 
-    <ImageView
-        android:id="@+id/dodoBird"
-        android:layout_width="78dp"
-        android:layout_height="56dp"
-        android:layout_below="@+id/gameOverTxt"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/dodobirddead" />
 </RelativeLayout>

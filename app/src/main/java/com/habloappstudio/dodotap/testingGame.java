@@ -170,8 +170,8 @@ public class testingGame extends AppCompatActivity {
 
         //spike
         if( 0 <= spikeCenterX && spikeCenterX <= playerSize && thePlayerY <= spikeCenterY && spikeCenterY <= thePlayerY+playerSize){
-            spikeSmallX = -200.0f;
-            score +=10;
+            stopMovements = true;
+            gameOver();
         }
 
         //big three
