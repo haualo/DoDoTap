@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,6 +55,8 @@ public class testingGame extends AppCompatActivity {
     private boolean action_flg = false;
     private boolean start_flg = false;
 
+    private boolean stopMovements = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,56 +100,66 @@ public class testingGame extends AppCompatActivity {
 
         hitCheck();
 
-        bigThreeX -= 12;
-        if(bigThreeX < -300 ){
-            bigThreeX = 1400;
-            bigThreeY = (int) Math.floor(Math.random() * (1000 - 650)) + 650;
+        if(stopMovements){
+            thePlayerY -= 11;
+            smallThreeX += 12;
+            mediumThreeX += 12;
+            bigThreeX += 12;
+            spikeSmallX += 30;
+        }else{
+            bigThreeX -= 12;
+            if(bigThreeX < -300 ){
+                bigThreeX = 1400;
+                bigThreeY = (int) Math.floor(Math.random() * (1000 - 650)) + 650;
+            }
+            bigThree.setX(bigThreeX);
+            bigThree.setY(bigThreeY);
+
+            mediumThreeX -= 12;
+            if(mediumThreeX < -300 ){
+                mediumThreeX = 1900;
+                mediumThreeY = (int) Math.floor(Math.random() * (950 - 800)) + 800;
+            }
+            mediumThree.setX(mediumThreeX);
+            mediumThree.setY(mediumThreeY);
+
+            smallThreeX -= 12;
+            if(smallThreeX < -300 ){
+                smallThreeX = 2400;
+                smallThreeY = (int) Math.floor(Math.random() * (900 - 1000)) + 1000;
+            }
+            smallThree.setX(smallThreeX);
+            smallThree.setY(smallThreeY);
+
+
+
+            spikeSmallX -= 30;
+            if(spikeSmallX < -200){
+                spikeSmallX = 1200;
+                spikeSmallY = (int) Math.floor(Math.random() * ((1270) - 300)) + 300;
+            }
+            spikeSmall.setX(spikeSmallX);
+            spikeSmall.setY(spikeSmallY);
+
+            thePlayerY +=11;
+
+            if(thePlayerY < 300){
+                thePlayerY=300;
+                thePlayerY +=30;
+            }
+            if(thePlayerY > 1270){
+                thePlayerY = 1270;
+            }
+            thePlayer1.setY(thePlayerY);
+            thePlayer2.setY(thePlayerY);
+
         }
-        bigThree.setX(bigThreeX);
-        bigThree.setY(bigThreeY);
 
-        mediumThreeX -= 12;
-        if(mediumThreeX < -300 ){
-            mediumThreeX = 1900;
-            mediumThreeY = (int) Math.floor(Math.random() * (950 - 800)) + 800;
-        }
-        mediumThree.setX(mediumThreeX);
-        mediumThree.setY(mediumThreeY);
-
-        smallThreeX -= 12;
-        if(smallThreeX < -300 ){
-            smallThreeX = 2400;
-            smallThreeY = (int) Math.floor(Math.random() * (900 - 1000)) + 1000;
-        }
-        smallThree.setX(smallThreeX);
-        smallThree.setY(smallThreeY);
-
-
-
-        spikeSmallX -= 30;
-        if(spikeSmallX < -200){
-            spikeSmallX = 1200;
-            spikeSmallY = (int) Math.floor(Math.random() * ((1270) - 300)) + 300;
-        }
-        spikeSmall.setX(spikeSmallX);
-        spikeSmall.setY(spikeSmallY);
-
-        thePlayerY +=11;
-
-        if(thePlayerY < 300){
-            thePlayerY=300;
-            thePlayerY +=30;
-        }
-        if(thePlayerY > 1270){
-            thePlayerY = 1270;
-        }
-        thePlayer1.setY(thePlayerY);
-        thePlayer2.setY(thePlayerY);
 
         scoreLabel.setText("Score: " + score);
 
-        Log.d("bigThreeY", " bigThreeY:  " +  bigThreeY);
-        Log.d("bigThreeY", " thePlayerY:  " +  thePlayerY);
+        //Log.d("bigThreeY", " bigThreeY:  " +  bigThreeY);
+        //Log.d("bigThreeY", " thePlayerY:  " +  thePlayerY);
     }
 
     public void hitCheck(){
@@ -163,22 +176,26 @@ public class testingGame extends AppCompatActivity {
 
         //big three
         if(thePlayerY > bigThreeY && bigThreeX <= thePlayerX+100 && thePlayerX < bigThreeX+100){
-            bigThreeX = -200.0f;
-            score += 50;
+            stopMovements = true;
+            gameOver();
         }
 
         //medium three
         if(thePlayerY > mediumThreeY && mediumThreeX <= thePlayerX+100 && thePlayerX < mediumThreeX+100){
-            mediumThreeX = -200.0f;
-            score += 50;
+            stopMovements = true;
+            gameOver();
         }
 
         //small three
         if(thePlayerY > smallThreeY && smallThreeX <= thePlayerX+100 && thePlayerX < smallThreeX+100){
-            smallThreeX = -200.0f;
-            score += 50;
+            stopMovements = true;
+            gameOver();
         }
 
+    }
+
+    public void gameOver(){
+        startActivity(new Intent(testingGame.this, testingGamePopUp.class));
     }
 
 

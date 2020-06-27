@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".testingGamePopUp"
+    android:fadingEdge="vertical"
+    android:background="@drawable/backgroundnew">
+
+    <Button
+        android:id="@+id/oKButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="545dp"
+        android:onClick="mainMenu"/>
+
+    <Button
+        android:id="@+id/replayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continue?"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/oKButton"
+        android:layout_marginLeft="230dp"
+        tools:layout_editor_absoluteX="242dp"
+        tools:layout_editor_absoluteY="547dp"
+        android:onClick="viewAd"/>
+
+    <TextView
+        android:id="@+id/gameOverTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GAME OVER"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/oKButton"
+
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="367dp" />
+    <TextView
+        android:id="@+id/highScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Best: 0"
+        android:textSize="32sp"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        android:layout_below="@+id/dodoBird"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageView
+        android:id="@+id/dodoBird"
+        android:layout_width="78dp"
+        android:layout_height="56dp"
+        android:layout_below="@+id/gameOverTxt"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/dodobirddead" />
+</RelativeLayout>
