@@ -162,7 +162,7 @@ public class testingGame extends AppCompatActivity {
             smallThreeX += 12;
             mediumThreeX += 12;
             bigThreeX += 12;
-            spikeSmallX += 30;
+            spikeSmallX += 45;
             crystalX += 15;
             cloud1X += 5;
             cloud2X +=5;
@@ -201,7 +201,7 @@ public class testingGame extends AppCompatActivity {
             crystal.setX(crystalX);
             crystal.setY(crystalY);
 
-            spikeSmallX -= 30;
+            spikeSmallX -= 45;
             if(spikeSmallX < -200){
                 spikeSmallX = 1200;
                 spikeSmallY = (int) Math.floor(Math.random() * ((1270) - 300)) + 300;
@@ -336,6 +336,7 @@ public class testingGame extends AppCompatActivity {
             bigThree.setVisibility(View.VISIBLE);
             mediumThree.setVisibility(View.VISIBLE);
             smallThree.setVisibility(View.VISIBLE);
+            crystal.setVisibility(View.VISIBLE);
 
             //FrameHeight
             FrameLayout frameLayout = findViewById(R.id.frame);

@@ -10,9 +10,12 @@
 
     <Button
         android:id="@+id/oKButton"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OK"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:textColor="@color/White"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_centerVertical="true"
@@ -26,6 +29,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Continue"
+        android:textColor="@color/White"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_centerVertical="true"
@@ -65,7 +70,7 @@
         android:layout_height="wrap_content"
         android:text="Best: 0"
         android:textSize="32sp"
-        android:textColor="@color/Black"
+        android:textColor="@color/White"
         android:textStyle="bold"
         android:layout_below="@+id/replayButton"
         android:layout_centerHorizontal="true"

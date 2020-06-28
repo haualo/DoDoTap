@@ -24,13 +24,13 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Play"
-        android:textSize="30sp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/text1"
-        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:onClick="startGame"
-
-        />
+        android:text="Play"
+        android:textColor="@color/White"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 </RelativeLayout>
 
