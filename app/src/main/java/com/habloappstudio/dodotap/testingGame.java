@@ -29,13 +29,18 @@ import java.util.TimerTask;
 public class testingGame extends AppCompatActivity {
 
     //sound
+    MediaPlayer tapScreen;
+    MediaPlayer getPoint;
+    MediaPlayer hitThree;
+    MediaPlayer hitObj;
 
 
     private TextView scoreLabel;
     private TextView tapLabel;
 
     private ImageView thePlayer1;
-    private ImageView thePlayer2;
+    private ImageView thePlayer2fly;
+    private ImageView thePlayer2fall;
     private ImageView thePlayer3;
     private ImageView spikeSmall;
     private ImageView bigThree;
@@ -83,11 +88,17 @@ public class testingGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing_game);
 
-        //bannerAD code*
+        //bannerAD code
         myAdView = findViewById(R.id.banner1);
         AdRequest adRequest = new AdRequest.Builder().build();
         myAdView.loadAd(adRequest);
 
+
+        //sound
+        tapScreen = MediaPlayer.create(getBaseContext(), R.raw.sfx_wing);
+        getPoint = MediaPlayer.create(this, R.raw.sfx_point);
+        hitThree = MediaPlayer.create(this, R.raw.sfx_die);
+        hitObj = MediaPlayer.create(this, R.raw.sfx_hit);
 
 
         scoreLabel = (TextView) findViewById(R.id.scoreText);
@@ -98,7 +109,8 @@ public class testingGame extends AppCompatActivity {
         smallThree = (ImageView) findViewById(R.id.three3);
 
         thePlayer1 = (ImageView) findViewById(R.id.player1);
-        thePlayer2 = (ImageView) findViewById(R.id.player2);
+        thePlayer2fly = (ImageView) findViewById(R.id.player2fly);
+        thePlayer2fall = (ImageView) findViewById(R.id.player2fall);
         thePlayer3 = (ImageView) findViewById(R.id.player3);
 
         spikeSmall = (ImageView) findViewById(R.id.smallSpike);
@@ -207,7 +219,8 @@ public class testingGame extends AppCompatActivity {
                 thePlayerY = 1270;
             }
             thePlayer1.setY(thePlayerY);
-            thePlayer2.setY(thePlayerY);
+            thePlayer2fly.setY(thePlayerY);
+            thePlayer2fall.setY(thePlayerY);
             thePlayer3.setY(thePlayerY);
 
             //clouds
@@ -246,42 +259,41 @@ public class testingGame extends AppCompatActivity {
 
     public void hitCheck(){
 
-        //SpikeCenter
+        //spike
         float spikeCenterX = spikeSmallX + spikeSmall.getWidth() / 2.0f;
         float spikeCenterY = spikeSmallY + spikeSmall.getHeight() / 2.0f;
 
         //spike
         if( 0 <= spikeCenterX && spikeCenterX <= playerSize && thePlayerY <= spikeCenterY && spikeCenterY <= thePlayerY+playerSize){
+            soundEffects(3);
             gameOver();
-            soundMix(4);
         }
 
         //crystal
         float crystalCenterX = crystalX + crystal.getWidth() / 2.0f;
         float crystalCenterY = crystalY + crystal.getHeight() / 2.0f;
 
-        //spike
         if( 0 <= crystalCenterX && crystalCenterX <= playerSize && thePlayerY <= crystalCenterY && crystalCenterY <= thePlayerY+playerSize){
             crystalX = 1500;
             score +=10;
-            soundMix(2);
+            soundEffects(2);
         }
         //big three
-        if(thePlayerY > bigThreeY && bigThreeX <= thePlayerX+100 && thePlayerX < bigThreeX+100){
+        if(thePlayerY > bigThreeY && bigThreeX <= thePlayerX+120 && thePlayerX < bigThreeX+100){
+            soundEffects(3);
             gameOver();
-            soundMix(3);
         }
 
         //medium three
-        if(thePlayerY > mediumThreeY && mediumThreeX <= thePlayerX+100 && thePlayerX < mediumThreeX+100){
+        if(thePlayerY > mediumThreeY && mediumThreeX <= thePlayerX+120 && thePlayerX < mediumThreeX+100){
+            soundEffects(3);
             gameOver();
-            soundMix(3);
         }
 
         //small three
-        if(thePlayerY > smallThreeY && smallThreeX <= thePlayerX+100 && thePlayerX < smallThreeX+100){
+        if(thePlayerY > smallThreeY && smallThreeX <= thePlayerX+120 && thePlayerX < smallThreeX+100){
+            soundEffects(3);
             gameOver();
-            soundMix(3);
         }
 
     }
@@ -293,7 +305,8 @@ public class testingGame extends AppCompatActivity {
             timer = null;
         }
         thePlayer1.setVisibility(View.GONE);
-        thePlayer2.setVisibility(View.GONE);
+        thePlayer2fly.setVisibility(View.GONE);
+        thePlayer2fall.setVisibility(View.GONE);
         thePlayer3.setVisibility(View.VISIBLE);
         stopMovements = true;
         Intent intent = new Intent(getApplicationContext(), testingGamePopUp.class);
@@ -302,23 +315,15 @@ public class testingGame extends AppCompatActivity {
     }
 
 
-    public void soundMix(int x){
-        final MediaPlayer tapScreen = MediaPlayer.create(this, R.raw.sfx_wing);
-        final MediaPlayer getPoint = MediaPlayer.create(this, R.raw.sfx_point);
-        final MediaPlayer hitThree = MediaPlayer.create(this, R.raw.sfx_die);
-        final MediaPlayer hitSpike = MediaPlayer.create(this, R.raw.sfx_hit);
+    public void soundEffects(int x){
+
 
         switch (x){
-            case 1: tapScreen.start();break;
+            case 1: tapScreen.start();  break;
             case 2: getPoint.start(); break;
-            case 3: hitThree.start(); break;
-            case 4: hitSpike.start(); break;
-            default:tapScreen.stop(); getPoint.stop(); hitThree.stop(); hitSpike.stop();
-
-
+            case 3: hitObj.start(); break;
+            default: tapScreen.release(); hitObj.release(); getPoint.release();
         }
-
-
 
     }
 
@@ -326,6 +331,7 @@ public class testingGame extends AppCompatActivity {
 
         if(!start_flg){
             start_flg = true;
+            thePlayer1.setVisibility(View.GONE);
             tapLabel.setVisibility(View.GONE);
             bigThree.setVisibility(View.VISIBLE);
             mediumThree.setVisibility(View.VISIBLE);
@@ -355,16 +361,16 @@ public class testingGame extends AppCompatActivity {
         if(event.getAction() == MotionEvent.ACTION_DOWN){
             thePlayerY -= 100;
             action_flg = true;
-            thePlayer1.setVisibility(View.INVISIBLE);
-            thePlayer2.setVisibility(View.VISIBLE);
-            soundMix(1);
+            thePlayer2fly.setVisibility(View.VISIBLE);
+            thePlayer1.setVisibility(View.GONE);
+            soundEffects(1);
 
-        }else{
-
+        }else if(event.getAction() == MotionEvent.ACTION_UP){
             action_flg = false;
+            thePlayer2fly.setVisibility(View.GONE);
             thePlayer1.setVisibility(View.VISIBLE);
-            thePlayer2.setVisibility(View.INVISIBLE);
         }
+
 
         return true;
     }
