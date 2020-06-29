@@ -99,9 +99,9 @@ public class testingGame extends AppCompatActivity {
         setContentView(R.layout.activity_testing_game);
 
         //bannerAD code
-//        myAdView = findViewById(R.id.banner1);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        myAdView.loadAd(adRequest);
+        myAdView = findViewById(R.id.banner1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        myAdView.loadAd(adRequest);
 
 
 
