@@ -348,7 +348,7 @@ public class testingGame extends AppCompatActivity {
 
         //spike
         if( 0 <= spikeCenterX && spikeCenterX <= playerSize && thePlayerY <= spikeCenterY && spikeCenterY <= thePlayerY+playerSize){
-            spikeSmallX = 1500;
+            spikeSmallX = -300;
             score -= 25;
             soundEffects(3);
             if(score <= 0){
@@ -361,7 +361,7 @@ public class testingGame extends AppCompatActivity {
         float crystalCenterY = crystalY + crystal.getHeight() / 2.0f;
 
         if( 0 <= crystalCenterX && crystalCenterX <= playerSize && thePlayerY <= crystalCenterY && crystalCenterY <= thePlayerY+playerSize){
-            crystalX = 1500;
+            crystalX = -300;
             score +=50;
             soundEffects(5);
 
