@@ -95,7 +95,6 @@ public class testingGamePopUp extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
     }
 
     public void mainMenu(View view) {
@@ -129,6 +128,8 @@ public class testingGamePopUp extends AppCompatActivity {
 
 
     }
+
+
 }
 
 

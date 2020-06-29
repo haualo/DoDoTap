@@ -29,10 +29,12 @@ import java.util.TimerTask;
 public class testingGame extends AppCompatActivity {
 
     //sound
-    MediaPlayer tapScreen;
-    MediaPlayer getPoint;
-    MediaPlayer hitObj;
-    MediaPlayer hitCrystal;
+    MediaPlayer flapSound;
+    MediaPlayer pointSound;
+    MediaPlayer hitSound;
+    MediaPlayer crystalSound;
+    MediaPlayer swooshSound;
+
 
 
 
@@ -73,8 +75,13 @@ public class testingGame extends AppCompatActivity {
     private float cloud3X, cloud3Y;
     private float threeUpAndDownX, threeUpAndDownY = -300;
     private float threeUpAndDownX2, threeUpAndDownY2 = -300;
+
     //score
     private int score;
+
+    //Speed
+    private int playerSpeedUp, playerSpeedDown, threeSpeed, spikeSpeed, crystalSpeed;
+
 
     //Timer
     private Timer timer = new Timer();
@@ -92,17 +99,18 @@ public class testingGame extends AppCompatActivity {
         setContentView(R.layout.activity_testing_game);
 
         //bannerAD code
+//        myAdView = findViewById(R.id.banner1);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        myAdView.loadAd(adRequest);
 
-        myAdView = findViewById(R.id.banner1);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        myAdView.loadAd(adRequest);
 
 
         //sound
-        tapScreen = MediaPlayer.create(getBaseContext(), R.raw.sfx_wing);
-        getPoint = MediaPlayer.create(this, R.raw.sfx_point);
-        hitObj = MediaPlayer.create(this, R.raw.sfx_hit);
-        hitCrystal = MediaPlayer.create(this, R.raw.sfx_crystal);
+        flapSound = MediaPlayer.create(getBaseContext(), R.raw.sfx_wing);
+        pointSound = MediaPlayer.create(this, R.raw.sfx_point);
+        hitSound = MediaPlayer.create(this, R.raw.sfx_hit);
+        crystalSound = MediaPlayer.create(this, R.raw.sfx_crystal);
+        swooshSound = MediaPlayer.create(this, R.raw.sfx_swooshing);
 
         scoreLabel = (TextView) findViewById(R.id.scoreText);
         tapLabel = (TextView) findViewById(R.id.tapStart);
@@ -129,9 +137,20 @@ public class testingGame extends AppCompatActivity {
         WindowManager windowManager = getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         Point size = new Point();
+        display.getSize(size);
 
         screenWidth = size.x;
         screenHeight = size.y;
+
+        //Speed
+
+        playerSpeedUp = Math.round(screenHeight / 20.4f);
+        playerSpeedDown = Math.round(screenHeight / 170.0f);
+
+        crystalSpeed = Math.round(screenWidth  / 54.0f);
+        spikeSpeed = Math.round(screenWidth  / 54.0f);
+        threeSpeed = Math.round(screenWidth / 108.0f);
+
 
         //the score back if continue is pressed in gameOver screen/pop
         score = getIntent().getIntExtra("SCORE", 0);
@@ -181,7 +200,7 @@ public class testingGame extends AppCompatActivity {
         }else{
 
             //the upNdown threes
-            threeUpAndDownX -=10;
+            threeUpAndDownX -=threeSpeed;
             if(threeUpAndDownX < -200){
                 threeUpAndDownX = 1000;
                 threeUpAndDownY = (int) Math.floor(Math.random() * (-150 + 450)) - 450;
@@ -189,7 +208,7 @@ public class testingGame extends AppCompatActivity {
             threeUpAndDown.setX(threeUpAndDownX);
             threeUpAndDown.setY(threeUpAndDownY);
 
-            threeUpAndDownX2 -=10;
+            threeUpAndDownX2 -=threeSpeed;
             if(threeUpAndDownX2 < -200){
                 threeUpAndDownX2 = threeUpAndDownX + 500;
                 threeUpAndDownY2 = (int) Math.floor(Math.random() * (-150 + 450)) - 450;
@@ -198,7 +217,7 @@ public class testingGame extends AppCompatActivity {
             threeUpAndDown2.setY(threeUpAndDownY2);
 
 
-            crystalX -=20;
+            crystalX -=crystalSpeed;
             if(crystalX < -200){
                 crystalX = 1500;
                 crystalY = (int) Math.floor(Math.random() * ((1270) - 300)) + 300;
@@ -206,7 +225,7 @@ public class testingGame extends AppCompatActivity {
             crystal.setX(crystalX);
             crystal.setY(crystalY);
 
-            spikeSmallX -= 20;
+            spikeSmallX -= spikeSpeed;
             if(spikeSmallX < -200){
                 spikeSmallX = 1200;
                 spikeSmallY = (int) Math.floor(Math.random() * ((1270) - 300)) + 300;
@@ -214,13 +233,17 @@ public class testingGame extends AppCompatActivity {
             spikeSmall.setX(spikeSmallX);
             spikeSmall.setY(spikeSmallY);
 
-            thePlayerY +=11;
-
-            if(thePlayerY < 300){
-                thePlayerY=300;
-                thePlayerY +=30;
+            if(action_flg){
+                thePlayerY -=playerSpeedUp;
+                action_flg = false;
             }
-            if(thePlayerY > 1270){
+            thePlayerY +=playerSpeedDown;
+
+
+            if(thePlayerY <= 300){
+                thePlayerY=300;
+            }
+            if(thePlayerY >= 1270){
                 thePlayerY = 1270;
             }
             thePlayer1.setY(thePlayerY);
@@ -260,6 +283,7 @@ public class testingGame extends AppCompatActivity {
 
         //Log.d("bigThreeY", " bigThreeY:  " +  bigThreeY);
         //Log.d("plauerY", " PlayerY:  " +  thePlayerY);
+
     }
 
     public void hitThreeBig(){
@@ -269,15 +293,13 @@ public class testingGame extends AppCompatActivity {
         float threeUpDownCenterY = threeUpAndDownY + threeUpAndDown.getHeight() / 2.0f;
         if( (0 <= threeUpDownCenterX && threeUpDownCenterX <= playerSize+100 && (thePlayerY-50) > (threeUpDownCenterY))
                 || (0 <= threeUpDownCenterX && threeUpDownCenterX <= playerSize+100 && (thePlayerY+50) < (threeUpDownCenterY-150)) ){
-
-            soundEffects(3);
+            hitSound.start();
             gameOver();
 
         }else if(0 <= threeUpDownCenterX && threeUpDownCenterX+80 <= playerSize &&thePlayerY <= threeUpDownCenterY+250 && thePlayerY >= threeUpDownCenterY-250 ){
-
+            swooshSound.start();
             score += 10;
-            soundEffects(2);
-
+            pointSound.start();
         }
 
         //three 2
@@ -285,14 +307,13 @@ public class testingGame extends AppCompatActivity {
         float threeUpDownCenterY2 = threeUpAndDownY2 + threeUpAndDown2.getHeight() / 2.0f;
         if( (0 <= threeUpDownCenterX2 && threeUpDownCenterX2 <= playerSize+100 && (thePlayerY-50) > (threeUpDownCenterY2))
                 || (0 <= threeUpDownCenterX2 && threeUpDownCenterX2 <= playerSize+100 && (thePlayerY+50) < (threeUpDownCenterY2-150)) ){
-
-            soundEffects(3);
+            hitSound.start();
             gameOver();
 
         }else if(0 <= threeUpDownCenterX2 && threeUpDownCenterX2+80 <= playerSize &&thePlayerY <= threeUpDownCenterY2+250 && thePlayerY >= threeUpDownCenterY2-250 ){
-
+            swooshSound.start();
             score += 10;
-            soundEffects(2);
+            pointSound.start();
 
         }
 
@@ -308,8 +329,8 @@ public class testingGame extends AppCompatActivity {
 
         //spike
         if( 0 <= spikeCenterX && spikeCenterX <= playerSize && thePlayerY <= spikeCenterY && spikeCenterY <= thePlayerY+playerSize){
-            soundEffects(3);
             score -= 25;
+            hitSound.start();
             if(score <= 0){
                 score=0;
             }
@@ -322,8 +343,7 @@ public class testingGame extends AppCompatActivity {
         if( 0 <= crystalCenterX && crystalCenterX <= playerSize && thePlayerY <= crystalCenterY && crystalCenterY <= thePlayerY+playerSize){
             crystalX = 1500;
             score +=50;
-            soundEffects(2);
-
+            crystalSound.start();
 
         }
 
@@ -347,21 +367,6 @@ public class testingGame extends AppCompatActivity {
     }
 
 
-
-    public void soundEffects(int x){
-
-
-        switch (x){
-            case 1: tapScreen.start();  break;
-            case 2: getPoint.start(); break;
-            case 3: hitObj.start(); break;
-            case 4: hitCrystal.start(); break;
-            default: tapScreen.release(); hitObj.release(); getPoint.release(); hitCrystal.release();
-        }
-
-
-
-    }
 
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -399,11 +404,11 @@ public class testingGame extends AppCompatActivity {
         }
 
         if(event.getAction() == MotionEvent.ACTION_DOWN){
-            thePlayerY -= 100;
+            flapSound.start();
             action_flg = true;
             thePlayer2fly.setVisibility(View.VISIBLE);
             thePlayer1.setVisibility(View.GONE);
-            soundEffects(1);
+
 
         }else if(event.getAction() == MotionEvent.ACTION_UP){
             action_flg = false;
@@ -413,5 +418,9 @@ public class testingGame extends AppCompatActivity {
 
 
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }
