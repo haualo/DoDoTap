@@ -181,13 +181,25 @@ public class testingGame extends AppCompatActivity {
 
     }
 
+    public void soundEffects(int x){
+        switch (x){
+            case 1: flapSound.start();  break;
+            case 2: pointSound.start(); break;
+            case 3: hitSound.start(); break;
+            case 4: swooshSound.start(); break;
+            case 5: crystalSound.start(); break;
+            default: flapSound.stop(); pointSound.stop(); hitSound.stop(); swooshSound.stop(); crystalSound.stop(); break;
+        }
+
+        if(mutePressed){
+            flapSound.pause(); pointSound.pause(); hitSound.pause(); swooshSound.pause(); crystalSound.pause();
+        }
+    }
 
     public void changePos(){
 
         hitCheck();
         hitThreeBig();
-        soundAndMute();
-
 
         if(stopMovements){
             thePlayerY -= 11;
@@ -298,12 +310,12 @@ public class testingGame extends AppCompatActivity {
         float threeUpDownCenterY = threeUpAndDownY + threeUpAndDown.getHeight() / 2.0f;
         if( (0 <= threeUpDownCenterX && threeUpDownCenterX <= playerSize+100 && (thePlayerY-50) > (threeUpDownCenterY))
                 || (0 <= threeUpDownCenterX && threeUpDownCenterX <= playerSize+100 && (thePlayerY+50) < (threeUpDownCenterY-150)) ){
-            hitSound.start();
+            soundEffects(3);
             gameOver();
 
         }else if(0 <= threeUpDownCenterX && threeUpDownCenterX+80 <= playerSize &&thePlayerY <= threeUpDownCenterY+250 && thePlayerY >= threeUpDownCenterY-250 ){
-            swooshSound.start();
-            pointSound.start();
+            soundEffects(2);
+            soundEffects(4);
             score += 10;
 
         }
@@ -313,12 +325,12 @@ public class testingGame extends AppCompatActivity {
         float threeUpDownCenterY2 = threeUpAndDownY2 + threeUpAndDown2.getHeight() / 2.0f;
         if( (0 <= threeUpDownCenterX2 && threeUpDownCenterX2 <= playerSize+100 && (thePlayerY-50) > (threeUpDownCenterY2))
                 || (0 <= threeUpDownCenterX2 && threeUpDownCenterX2 <= playerSize+100 && (thePlayerY+50) < (threeUpDownCenterY2-150)) ){
-            hitSound.start();
+            soundEffects(3);
             gameOver();
 
         }else if(0 <= threeUpDownCenterX2 && threeUpDownCenterX2+80 <= playerSize &&thePlayerY <= threeUpDownCenterY2+250 && thePlayerY >= threeUpDownCenterY2-250 ){
-            swooshSound.start();
-            pointSound.start();
+            soundEffects(2);
+            soundEffects(4);
 
             score += 10;
 
@@ -338,7 +350,7 @@ public class testingGame extends AppCompatActivity {
         if( 0 <= spikeCenterX && spikeCenterX <= playerSize && thePlayerY <= spikeCenterY && spikeCenterY <= thePlayerY+playerSize){
             spikeSmallX = 1500;
             score -= 25;
-            hitSound.start();
+            soundEffects(3);
             if(score <= 0){
                 score=0;
             }
@@ -351,7 +363,7 @@ public class testingGame extends AppCompatActivity {
         if( 0 <= crystalCenterX && crystalCenterX <= playerSize && thePlayerY <= crystalCenterY && crystalCenterY <= thePlayerY+playerSize){
             crystalX = 1500;
             score +=50;
-            crystalSound.start();
+            soundEffects(5);
 
         }
 
@@ -412,7 +424,12 @@ public class testingGame extends AppCompatActivity {
         }
 
         if(event.getAction() == MotionEvent.ACTION_DOWN){
-            flapSound.start();
+            if(mutePressed){
+                soundEffects(0);
+            }else{
+                soundEffects(1);
+            }
+
             action_flg = true;
             thePlayer2fly.setVisibility(View.VISIBLE);
             thePlayer1.setVisibility(View.GONE);
@@ -428,23 +445,15 @@ public class testingGame extends AppCompatActivity {
         return true;
     }
 
-    public void soundAndMute(){
 
-        if(mutePressed){
-            //stop
-            flapSound.stop();
-            pointSound.stop();
-            hitSound.stop();
-            crystalSound.stop();
-            swooshSound.stop();
-        }
 
-    }
 
     public void muteButton(View view) {
+        muteLabel.setText("Here It be!");
         muteLabel.setVisibility(View.GONE);
         Toast.makeText(this, "No sound this round", Toast.LENGTH_SHORT).show();
         mutePressed = true;
+
     }
 
 
