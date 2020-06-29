@@ -147,6 +147,7 @@ public class testingGame extends AppCompatActivity {
 
         crystalX = -600;
         thePlayer1.setX(thePlayerX);
+        thePlayer3.setX(thePlayerX);
 
         threeUpAndDownX = -600;
         threeUpAndDown.setY(threeUpAndDownY);
