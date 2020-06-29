@@ -9,14 +9,7 @@
     android:orientation="vertical">
 
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/banner1"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        app:adSize="SMART_BANNER"
-        app:adUnitId="ca-app-pub-6760992196528607/7281807300" />
+
 
     <FrameLayout
         android:id="@+id/frame"
@@ -118,10 +111,30 @@
             android:layout_marginTop="50dp"
             app:srcCompat="@drawable/cloud" />
 
+        <ImageView
+            android:id="@+id/threeupanddown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:srcCompat="@drawable/threeupanddown" />
+        <ImageView
+            android:id="@+id/threeupanddown2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:srcCompat="@drawable/threeupanddown" />
+
 
     </FrameLayout>
 
-
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/banner1"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="SMART_BANNER"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
 
     <TextView

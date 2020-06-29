@@ -36,7 +36,7 @@ public class testingGamePopUp extends AppCompatActivity {
         setContentView(R.layout.activity_testing_game_pop_up);
 
         ///Ad to continue
-        rewardedAd = new RewardedAd(this, "ca-app-pub-6760992196528607/1721169493");
+        rewardedAd = new RewardedAd(this, "ca-app-pub-3940256099942544/5224354917");
         RewardedAdLoadCallback callback = new RewardedAdLoadCallback(){
             @Override
             public void onRewardedAdFailedToLoad(int i) {
