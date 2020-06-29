@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -24,6 +25,10 @@ import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
 public class testingGamePopUp extends AppCompatActivity {
 
+    //sound
+    MediaPlayer dieSound;
+
+
     //reward ad
     private RewardedAd rewardedAd;
 
@@ -34,6 +39,9 @@ public class testingGamePopUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing_game_pop_up);
+        dieSound = MediaPlayer.create(this, R.raw.sfx_die);
+        dieSound.start();
+
 
         ///Ad to continue
         rewardedAd = new RewardedAd(this, "ca-app-pub-3940256099942544/5224354917");
@@ -77,6 +85,7 @@ public class testingGamePopUp extends AppCompatActivity {
             editor.putInt("HIGH_SCORE", score);
             editor.apply();
 
+            Toast.makeText(this, "NEW BEST SCORE!", Toast.LENGTH_SHORT).show();
             highScoreLabel.setText("BEST: " + score);
         }else{
             highScoreLabel.setText("BEST: " + highScore);
@@ -109,6 +118,7 @@ public class testingGamePopUp extends AppCompatActivity {
                 public void onRewardedAdClosed() {
 
                 }
+
 
             };
             rewardedAd.show(activityContext, adCallback);

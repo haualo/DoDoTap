@@ -15,7 +15,7 @@
         android:text="DoDoTap"
         android:textSize="80sp"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimary"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         />
@@ -26,11 +26,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/text1"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorPrimary"
         android:onClick="startGame"
         android:text="Play"
         android:textColor="@color/White"
         android:textSize="30sp"
+        android:layout_marginTop="30dp"
         android:textStyle="bold" />
 </RelativeLayout>
 

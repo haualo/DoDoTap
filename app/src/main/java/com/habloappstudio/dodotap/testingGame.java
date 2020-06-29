@@ -32,7 +32,7 @@ public class testingGame extends AppCompatActivity {
     MediaPlayer tapScreen;
     MediaPlayer getPoint;
     MediaPlayer hitObj;
-    MediaPlayer dieSound;
+    MediaPlayer hitCrystal;
 
 
 
@@ -53,7 +53,6 @@ public class testingGame extends AppCompatActivity {
     private ImageView cloud3;
     private ImageView threeUpAndDown;
     private ImageView threeUpAndDown2;
-
     //bannerAd
     private AdView myAdView;
 
@@ -74,7 +73,6 @@ public class testingGame extends AppCompatActivity {
     private float cloud3X, cloud3Y;
     private float threeUpAndDownX, threeUpAndDownY = -300;
     private float threeUpAndDownX2, threeUpAndDownY2 = -300;
-
     //score
     private int score;
 
@@ -94,17 +92,17 @@ public class testingGame extends AppCompatActivity {
         setContentView(R.layout.activity_testing_game);
 
         //bannerAD code
-        /*
+
         myAdView = findViewById(R.id.banner1);
         AdRequest adRequest = new AdRequest.Builder().build();
         myAdView.loadAd(adRequest);
-         */
+
 
         //sound
         tapScreen = MediaPlayer.create(getBaseContext(), R.raw.sfx_wing);
         getPoint = MediaPlayer.create(this, R.raw.sfx_point);
         hitObj = MediaPlayer.create(this, R.raw.sfx_hit);
-        dieSound = MediaPlayer.create(this, R.raw.sfx_die);
+        hitCrystal = MediaPlayer.create(this, R.raw.sfx_crystal);
 
         scoreLabel = (TextView) findViewById(R.id.scoreText);
         tapLabel = (TextView) findViewById(R.id.tapStart);
@@ -180,6 +178,7 @@ public class testingGame extends AppCompatActivity {
             threeUpAndDownX +=10;
             threeUpAndDownX2 +=10;
         }else{
+
             //the upNdown threes
             threeUpAndDownX -=10;
             if(threeUpAndDownX < -200){
@@ -191,14 +190,14 @@ public class testingGame extends AppCompatActivity {
 
             threeUpAndDownX2 -=10;
             if(threeUpAndDownX2 < -200){
-                threeUpAndDownX2 = 1500;
+                threeUpAndDownX2 = threeUpAndDownX + 500;
                 threeUpAndDownY2 = (int) Math.floor(Math.random() * (-150 + 450)) - 450;
             }
             threeUpAndDown2.setX(threeUpAndDownX2);
             threeUpAndDown2.setY(threeUpAndDownY2);
 
 
-            crystalX -=15;
+            crystalX -=20;
             if(crystalX < -200){
                 crystalX = 1500;
                 crystalY = (int) Math.floor(Math.random() * ((1270) - 300)) + 300;
@@ -206,7 +205,7 @@ public class testingGame extends AppCompatActivity {
             crystal.setX(crystalX);
             crystal.setY(crystalY);
 
-            spikeSmallX -= 45;
+            spikeSmallX -= 20;
             if(spikeSmallX < -200){
                 spikeSmallX = 1200;
                 spikeSmallY = (int) Math.floor(Math.random() * ((1270) - 300)) + 300;
@@ -238,11 +237,11 @@ public class testingGame extends AppCompatActivity {
                 cloud1Y = (int) Math.floor(Math.random() * ((250) - 1)) + 1;
             }
             if(cloud2X < -400){
-                cloud2X = 1500;
+                cloud2X = cloud1X + 500;
                 cloud2Y = (int) Math.floor(Math.random() * ((250) - 1)) + 1;
             }
             if(cloud3X < -420){
-                cloud3X = 1800;
+                cloud3X = cloud2X + 500;
                 cloud3Y = (int) Math.floor(Math.random() * ((250) - 1)) + 1;
             }
             cloud1.setX(cloud1X);
@@ -310,6 +309,9 @@ public class testingGame extends AppCompatActivity {
         if( 0 <= spikeCenterX && spikeCenterX <= playerSize && thePlayerY <= spikeCenterY && spikeCenterY <= thePlayerY+playerSize){
             soundEffects(3);
             score -= 25;
+            if(score <= 0){
+                score=0;
+            }
         }
 
         //crystal
@@ -320,6 +322,8 @@ public class testingGame extends AppCompatActivity {
             crystalX = 1500;
             score +=50;
             soundEffects(2);
+
+
         }
 
     }
@@ -330,7 +334,6 @@ public class testingGame extends AppCompatActivity {
             timer.cancel();
             timer = null;
         }
-        soundEffects(4);
         thePlayer1.setVisibility(View.GONE);
         thePlayer2fly.setVisibility(View.GONE);
         thePlayer2fall.setVisibility(View.GONE);
@@ -343,6 +346,7 @@ public class testingGame extends AppCompatActivity {
     }
 
 
+
     public void soundEffects(int x){
 
 
@@ -350,8 +354,8 @@ public class testingGame extends AppCompatActivity {
             case 1: tapScreen.start();  break;
             case 2: getPoint.start(); break;
             case 3: hitObj.start(); break;
-            case 4: dieSound.start();
-            default: tapScreen.release(); hitObj.release(); getPoint.release(); dieSound.release();
+            case 4: hitCrystal.start(); break;
+            default: tapScreen.release(); hitObj.release(); getPoint.release(); hitCrystal.release();
         }
 
 

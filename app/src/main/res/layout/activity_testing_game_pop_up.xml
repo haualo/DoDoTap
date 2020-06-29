@@ -13,14 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OK"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorPrimary"
         android:textColor="@color/White"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="545dp"
         android:onClick="mainMenu"/>
 
     <Button
@@ -29,27 +26,24 @@
         android:layout_height="wrap_content"
         android:text="Continue"
         android:textColor="@color/White"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/oKButton"
-        android:layout_marginLeft="100dp"
-        tools:layout_editor_absoluteX="242dp"
-        tools:layout_editor_absoluteY="547dp"
-        android:onClick="viewAd"/>
+        android:onClick="viewAd"
+        android:layout_alignBaseline="@+id/oKButton"
+        android:layout_alignParentRight="true"/>
 
     <TextView
         android:id="@+id/gameOverTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/birdP"
+        android:layout_centerHorizontal="true"
         android:text="GAME OVER"
+        android:textColor="@color/colorPrimary"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/oKButton"
         tools:layout_editor_absoluteX="163dp"
         tools:layout_editor_absoluteY="367dp" />
     <TextView
@@ -71,8 +65,17 @@
         android:textSize="32sp"
         android:textColor="@color/White"
         android:textStyle="bold"
-        android:layout_below="@+id/replayButton"
+        android:layout_below="@+id/birdP"
         android:layout_centerHorizontal="true"
         />
+
+    <ImageView
+        android:id="@+id/birdP"
+        android:layout_width="wrap_content"
+        android:layout_height="91dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/replayButton"
+        android:layout_toRightOf="@+id/oKButton"
+        android:src="@drawable/deadsmall2" />
 
 </RelativeLayout>

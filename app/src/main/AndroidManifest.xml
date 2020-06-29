@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".testingGamePopUp" android:theme="@style/AppTheme.PopUpTheme"></activity>
-        <activity android:name=".testingGame" />
-        <activity android:name=".gameActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".testingGamePopUp" android:theme="@style/AppTheme.PopUpTheme"/>
+        <activity android:name=".testingGame" android:screenOrientation="portrait" />
+        <activity android:name=".gameActivity" android:screenOrientation="portrait" />
+        <activity android:name=".MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
