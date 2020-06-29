@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -40,6 +41,7 @@ public class testingGame extends AppCompatActivity {
 
     private TextView scoreLabel;
     private TextView tapLabel;
+    private TextView muteLabel;
 
     private ImageView thePlayer1;
     private ImageView thePlayer2fly;
@@ -90,7 +92,7 @@ public class testingGame extends AppCompatActivity {
     //status
     private boolean action_flg = false;
     private boolean start_flg = false;
-
+    private boolean mutePressed = false;
     private boolean stopMovements = false;
 
     @Override
@@ -114,6 +116,7 @@ public class testingGame extends AppCompatActivity {
 
         scoreLabel = (TextView) findViewById(R.id.scoreText);
         tapLabel = (TextView) findViewById(R.id.tapStart);
+        muteLabel = (TextView) findViewById(R.id.muteTextButton);
 
         bigThree = (ImageView) findViewById(R.id.three1);
         mediumThree = (ImageView) findViewById(R.id.three2);
@@ -175,6 +178,7 @@ public class testingGame extends AppCompatActivity {
         threeUpAndDown2.setY(threeUpAndDownY2);
 
         scoreLabel.setText("Score: " + score);
+
     }
 
 
@@ -182,7 +186,7 @@ public class testingGame extends AppCompatActivity {
 
         hitCheck();
         hitThreeBig();
-
+        soundAndMute();
 
 
         if(stopMovements){
@@ -288,6 +292,7 @@ public class testingGame extends AppCompatActivity {
 
     public void hitThreeBig(){
 
+        boolean tester = true;
         //three upp and down
         float threeUpDownCenterX = threeUpAndDownX + threeUpAndDown.getWidth() / 2.0f;
         float threeUpDownCenterY = threeUpAndDownY + threeUpAndDown.getHeight() / 2.0f;
@@ -298,8 +303,9 @@ public class testingGame extends AppCompatActivity {
 
         }else if(0 <= threeUpDownCenterX && threeUpDownCenterX+80 <= playerSize &&thePlayerY <= threeUpDownCenterY+250 && thePlayerY >= threeUpDownCenterY-250 ){
             swooshSound.start();
-            score += 10;
             pointSound.start();
+            score += 10;
+
         }
 
         //three 2
@@ -312,8 +318,9 @@ public class testingGame extends AppCompatActivity {
 
         }else if(0 <= threeUpDownCenterX2 && threeUpDownCenterX2+80 <= playerSize &&thePlayerY <= threeUpDownCenterY2+250 && thePlayerY >= threeUpDownCenterY2-250 ){
             swooshSound.start();
-            score += 10;
             pointSound.start();
+
+            score += 10;
 
         }
 
@@ -329,6 +336,7 @@ public class testingGame extends AppCompatActivity {
 
         //spike
         if( 0 <= spikeCenterX && spikeCenterX <= playerSize && thePlayerY <= spikeCenterY && spikeCenterY <= thePlayerY+playerSize){
+            spikeSmallX = 1500;
             score -= 25;
             hitSound.start();
             if(score <= 0){
@@ -420,7 +428,32 @@ public class testingGame extends AppCompatActivity {
         return true;
     }
 
+    public void soundAndMute(){
+
+        if(mutePressed){
+            //stop
+            flapSound.stop();
+            pointSound.stop();
+            hitSound.stop();
+            crystalSound.stop();
+            swooshSound.stop();
+        }
+
+    }
+
+    public void muteButton(View view) {
+        muteLabel.setVisibility(View.GONE);
+        Toast.makeText(this, "No sound this round", Toast.LENGTH_SHORT).show();
+        mutePressed = true;
+    }
+
+
+
     @Override
     public void onBackPressed() {
     }
+
+
+
+
 }
