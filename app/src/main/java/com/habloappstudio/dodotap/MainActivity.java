@@ -22,4 +22,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();*/
     }
+
+    public void aboutPopUp(View view) {
+        startActivity(new Intent(MainActivity.this, AboutActivityPopUp.class));
+    }
 }

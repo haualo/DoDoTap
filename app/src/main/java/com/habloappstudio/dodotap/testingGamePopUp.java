@@ -31,6 +31,7 @@ public class testingGamePopUp extends AppCompatActivity {
 
     //reward ad
     private RewardedAd rewardedAd;
+    private boolean check_press = false;
 
     //score
     int score;
@@ -48,15 +49,23 @@ public class testingGamePopUp extends AppCompatActivity {
         RewardedAdLoadCallback callback = new RewardedAdLoadCallback(){
             @Override
             public void onRewardedAdFailedToLoad(int i) {
-                super.onRewardedAdFailedToLoad(i);
+                if(check_press) {
+                    Toast.makeText(getApplicationContext(), "Ad Failed To Load.\n" + "Need A Internet Connection", Toast.LENGTH_LONG).show();
+                    check_press = false;
+                }
                 Log.d("AD FAILED", "AD FAILED");
             }
 
             @Override
             public void onRewardedAdLoaded() {
-                super.onRewardedAdLoaded();
+
+                if(check_press){
+                    Toast.makeText(getApplicationContext(), "Ad Has Loaded\t"  + "Press Continue Again", Toast.LENGTH_LONG).show();
+                    check_press=false;
+                }
                 Log.d("AD LOADED", "AD Loaded");
             }
+
         };
         this.rewardedAd.loadAd(new AdRequest.Builder().build(), callback);
 
@@ -122,6 +131,7 @@ public class testingGamePopUp extends AppCompatActivity {
             };
             rewardedAd.show(activityContext, adCallback);
         } else {
+            check_press = true;
             Log.d("TAG", "The Ad ad wasn't loaded yet.");
             Toast.makeText(this, "Ad Loading", Toast.LENGTH_SHORT).show();
         }

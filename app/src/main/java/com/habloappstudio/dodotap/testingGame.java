@@ -106,7 +106,7 @@ public class testingGame extends AppCompatActivity {
 
 
         //sound
-        flapSound = MediaPlayer.create(getBaseContext(), R.raw.sfx_wing);
+        flapSound = MediaPlayer.create(this, R.raw.sfx_wing);
         pointSound = MediaPlayer.create(this, R.raw.sfx_point);
         hitSound = MediaPlayer.create(this, R.raw.sfx_hit);
         crystalSound = MediaPlayer.create(this, R.raw.sfx_crystal);

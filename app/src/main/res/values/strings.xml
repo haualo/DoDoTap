@@ -4,16 +4,23 @@
     //mainActivity
     <string name="do_do_tap">DoDoTap</string>
     <string name="play_button">PLAY</string>
+    <string name="about_button">ABOUT</string>
+
 
 
     //testin_game_Layot
     <string name="tap_tap">Tap Tap</string>
     <string name="score_0">Score: 0</string>
 
-    //popUpWindow
+    //gameOverPopUp
     <string name="ok_button">OK</string>
     <string name="continue_button">Continue</string>
     <string name="game_over">GAME OVER</string>
     <string name="last_score">0</string>
     <string name="best_score">BEST: 0</string>
+
+    //aboutPopUp
+    <string name="game_overpop">Hit: Game Over  Avoid: Points</string>
+    <string name="lose_points">Lose Points</string>
+    <string name="get_points">Extra Points</string>
 </resources>
