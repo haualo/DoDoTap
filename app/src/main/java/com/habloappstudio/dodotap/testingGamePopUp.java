@@ -60,7 +60,7 @@ public class testingGamePopUp extends AppCompatActivity {
             public void onRewardedAdLoaded() {
 
                 if(check_press){
-                    Toast.makeText(getApplicationContext(), "Ad Has Loaded\t"  + "Press Continue Again", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Ad Has Loaded\n"  + "Press Continue Again", Toast.LENGTH_LONG).show();
                     check_press=false;
                 }
                 Log.d("AD LOADED", "AD Loaded");
