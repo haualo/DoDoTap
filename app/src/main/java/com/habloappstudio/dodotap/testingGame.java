@@ -41,9 +41,9 @@ public class testingGame extends AppCompatActivity {
 
     private TextView scoreLabel;
     private TextView tapLabel;
-    private TextView soundOff;
-    private TextView soundOn;
 
+    private ImageView soundOff;
+    private ImageView soundOn;
     private ImageView thePlayer1;
     private ImageView thePlayer2fly;
     private ImageView thePlayer2fall;
@@ -103,9 +103,9 @@ public class testingGame extends AppCompatActivity {
         setContentView(R.layout.activity_testing_game);
 
         //bannerAD code
-//        myAdView = findViewById(R.id.banner1);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        myAdView.loadAd(adRequest);
+        myAdView = findViewById(R.id.banner1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        myAdView.loadAd(adRequest);
 
 
 
@@ -118,8 +118,9 @@ public class testingGame extends AppCompatActivity {
 
         scoreLabel = (TextView) findViewById(R.id.scoreText);
         tapLabel = (TextView) findViewById(R.id.tapStart);
-        soundOff = (TextView) findViewById(R.id.soundOffButton);
-        soundOn = (TextView) findViewById(R.id.soundOnButton);
+
+        soundOff = (ImageView) findViewById(R.id.soundOffButton);
+        soundOn = (ImageView) findViewById(R.id.soundOnButton);
 
         threeUpAndDown = (ImageView) findViewById(R.id.threeupanddown);
         threeUpAndDown2 = (ImageView) findViewById(R.id.threeupanddown2);
@@ -508,14 +509,14 @@ public class testingGame extends AppCompatActivity {
 
 
     public void soundOffButton(View view) {
-        soundOff.setVisibility(View.GONE);
+        soundOff.setVisibility(View.INVISIBLE);
         soundOn.setVisibility(View.VISIBLE);
         soundOffPressed = true;
         soundOnPressed = false;
 
     }
     public void soundOnButton(View view) {
-        soundOn.setVisibility(View.GONE);
+        soundOn.setVisibility(View.INVISIBLE);
         soundOff.setVisibility(View.VISIBLE);
         soundOnPressed = true;
         soundOffPressed = false;

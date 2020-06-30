@@ -9,12 +9,10 @@
     android:orientation="vertical">
 
 
-
-
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/smallSpike"
@@ -28,34 +26,35 @@
             android:id="@+id/player1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/dodobird1small"
             android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/dodobird1small"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/player2fly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/dodobird2smallfly"
-            android:visibility="invisible"
             android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/dodobird2smallfly"
             tools:ignore="ContentDescription" />
+
         <ImageView
             android:id="@+id/player2fall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/dodobird2smallfall"
-            android:visibility="invisible"
             android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/dodobird2smallfall"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/player3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/deadsmall"
-            android:visibility="invisible"
             android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/deadsmall"
             tools:ignore="ContentDescription" />
 
         <ImageView
@@ -79,23 +78,25 @@
 
         <ImageView
             android:id="@+id/cloud1"
-            android:layout_marginStart="0dp"
             android:layout_width="135dp"
             android:layout_height="81dp"
+            android:layout_marginStart="0dp"
             app:srcCompat="@drawable/cloud"
             tools:ignore="ContentDescription" />
+
         <ImageView
             android:id="@+id/cloud2"
-            android:layout_marginStart="280dp"
             android:layout_width="135dp"
             android:layout_height="81dp"
+            android:layout_marginStart="280dp"
             app:srcCompat="@drawable/cloud"
             tools:ignore="ContentDescription" />
+
         <ImageView
             android:id="@+id/cloud3"
-            android:layout_marginStart="120dp"
             android:layout_width="135dp"
             android:layout_height="81dp"
+            android:layout_marginStart="120dp"
             android:layout_marginTop="50dp"
             app:srcCompat="@drawable/cloud"
             tools:ignore="ContentDescription" />
@@ -107,6 +108,7 @@
             android:visibility="gone"
             app:srcCompat="@drawable/threeupanddown"
             tools:ignore="ContentDescription" />
+
         <ImageView
             android:id="@+id/threeupanddown2"
             android:layout_width="wrap_content"
@@ -132,9 +134,6 @@
             tools:ignore="ContentDescription" />
 
 
-
-
-
     </FrameLayout>
 
     <com.google.android.gms.ads.AdView
@@ -156,38 +155,30 @@
         android:textColor="@color/dodoPurple"
         android:textStyle="bold"/>
 
-    <Button
+
+    <ImageView
         android:id="@+id/soundOffButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SOUND OFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/White"
-        android:background="@color/Black"
-        android:focusableInTouchMode="true"
-        android:layout_centerHorizontal="true"
+        android:layout_width="71dp"
+        android:layout_height="52dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@id/frame"
+        android:layout_centerHorizontal="true"
+        android:focusableInTouchMode="true"
         android:onClick="soundOffButton"
-
-        />
-
-    <Button
+        android:src="@drawable/soundon"
+        tools:ignore="ContentDescription" />
+    <ImageView
         android:id="@+id/soundOnButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SOUND ON"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/White"
-        android:background="@color/Black"
-        android:focusableInTouchMode="true"
-        android:layout_centerHorizontal="true"
+        android:layout_width="71dp"
+        android:layout_height="52dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@id/frame"
+        android:layout_centerHorizontal="true"
+        android:focusableInTouchMode="true"
         android:onClick="soundOnButton"
-        android:visibility="invisible"
-
-        />
+        android:src="@drawable/soundoff"
+        tools:ignore="ContentDescription"
+        android:visibility="invisible"/>
 
 
 
