@@ -23,7 +23,7 @@
             tools:ignore="ContentDescription" />
         <TextView
             android:text="@string/get_points"
-            android:textColor="@color/Black"
+            android:textColor="@color/White"
             android:textSize="30sp"
             android:textStyle="bold"/>
     </TableRow>
@@ -46,9 +46,10 @@
         <TextView
             android:layout_marginStart="10dp"
             android:text="@string/lose_points"
-            android:textColor="@color/Black"
+            android:textColor="@color/White"
             android:textSize="30sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            />
 
     </TableRow>
     <TableRow
@@ -67,7 +68,7 @@
             />
         <TextView
             android:text="@string/game_overpop"
-            android:textColor="@color/Black"
+            android:textColor="@color/White"
             android:textSize="30sp"
             android:textStyle="bold"/>
 

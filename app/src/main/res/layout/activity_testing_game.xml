@@ -73,7 +73,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="150sp"
             android:text="@string/tap_tap"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/dodoPurple"
             android:textSize="70sp"
             android:textStyle="bold" />
 
@@ -153,7 +153,7 @@
         android:layout_height="wrap_content"
         android:text="@string/score_0"
         android:textSize="35sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/dodoPurple"
         android:textStyle="bold"/>
 
     <Button
@@ -169,6 +169,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:onClick="soundOffButton"
+
         />
 
     <Button
@@ -185,6 +186,7 @@
         android:layout_alignParentBottom="true"
         android:onClick="soundOnButton"
         android:visibility="invisible"
+
         />
 
 

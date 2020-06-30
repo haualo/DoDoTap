@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ok_button"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/dodoPurple"
         android:textColor="@color/White"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="@string/continue_button"
         android:textColor="@color/White"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/dodoPurple"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_centerVertical="true"
@@ -42,22 +43,24 @@
         android:layout_above="@+id/birdP"
         android:layout_centerHorizontal="true"
         android:text="@string/game_over"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/dodoPurple"
         android:textSize="50sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="163dp"
         tools:layout_editor_absoluteY="367dp" />
+
     <TextView
         android:id="@+id/scoreLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/last_score"
         android:textSize="25sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/dodoPurple"
         android:textStyle="bold"
         android:layout_above="@+id/gameOverTxt"
         android:layout_centerHorizontal="true"
         />
+
     <TextView
         android:id="@+id/highScore"
         android:layout_width="wrap_content"
