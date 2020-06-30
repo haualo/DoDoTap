@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".testingGamePopUp"
     android:fadingEdge="vertical"
-    android:background="@drawable/gameover"
+    android:background="@drawable/gameover2"
     android:gravity="center">
 
     <Button

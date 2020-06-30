@@ -5,8 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".testingGame"
-    android:background="@drawable/backgroundnew3"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/layoutMain">
+
+
+    <FrameLayout
+        android:id="@+id/nightMode"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/backgroundnew5night"
+        android:visibility="gone"
+        android:foregroundGravity="center">
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/dayMode"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/backgroundnew5"
+        android:foregroundGravity="center">
+    </FrameLayout>
 
 
     <FrameLayout

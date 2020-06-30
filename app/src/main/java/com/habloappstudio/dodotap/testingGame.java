@@ -42,6 +42,8 @@ public class testingGame extends AppCompatActivity {
     private TextView scoreLabel;
     private TextView tapLabel;
 
+
+
     private ImageView soundOff;
     private ImageView soundOn;
     private ImageView thePlayer1;
@@ -57,6 +59,7 @@ public class testingGame extends AppCompatActivity {
     private ImageView threeUpAndDown2;
     private ImageView threeUpAndDown3;
     private ImageView threeUpAndDown4;
+
 
     //bannerAd
     private AdView myAdView;
@@ -77,6 +80,7 @@ public class testingGame extends AppCompatActivity {
     private float threeUpAndDownX2, threeUpAndDownY2 = -700;
     private float threeUpAndDownX3, threeUpAndDownY3 = -700;
     private float threeUpAndDownX4, threeUpAndDownY4 = -700;
+    private float looper;
 
 
     //score
@@ -103,9 +107,9 @@ public class testingGame extends AppCompatActivity {
         setContentView(R.layout.activity_testing_game);
 
         //bannerAD code
-        myAdView = findViewById(R.id.banner1);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        myAdView.loadAd(adRequest);
+//        myAdView = findViewById(R.id.banner1);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        myAdView.loadAd(adRequest);
 
 
 
@@ -118,6 +122,8 @@ public class testingGame extends AppCompatActivity {
 
         scoreLabel = (TextView) findViewById(R.id.scoreText);
         tapLabel = (TextView) findViewById(R.id.tapStart);
+
+
 
         soundOff = (ImageView) findViewById(R.id.soundOffButton);
         soundOn = (ImageView) findViewById(R.id.soundOnButton);
@@ -191,6 +197,25 @@ public class testingGame extends AppCompatActivity {
 
     }
 
+    public void nighAndDay(){
+
+        FrameLayout nightMode = findViewById(R.id.nightMode);
+        FrameLayout dayMode = findViewById(R.id.dayMode);
+        looper++;
+        if(looper > 50){
+            nightMode.setVisibility(View.VISIBLE);
+            dayMode.setVisibility(View.GONE);
+        }
+        if(looper > 100){
+            nightMode.setVisibility(View.GONE);
+            dayMode.setVisibility(View.VISIBLE);
+            looper=0;
+        }
+
+        Log.d("LOOPER", "nighAndDay: " + looper);
+
+    }
+
     public void soundEffects(int x){
 
         if(!soundOffPressed || soundOnPressed){
@@ -219,6 +244,7 @@ public class testingGame extends AppCompatActivity {
 
         hitCheck();
         hitThreeBig();
+        nighAndDay();
 
         if(stopMovements){
 
