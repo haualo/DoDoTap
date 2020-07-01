@@ -42,8 +42,8 @@ public class testingGame extends AppCompatActivity {
     private TextView scoreLabel;
     private TextView tapLabel;
 
-
-
+    private ImageView theSun;
+    private ImageView theMoon;
     private ImageView soundOff;
     private ImageView soundOn;
     private ImageView thePlayer1;
@@ -80,8 +80,8 @@ public class testingGame extends AppCompatActivity {
     private float threeUpAndDownX2, threeUpAndDownY2 = -700;
     private float threeUpAndDownX3, threeUpAndDownY3 = -700;
     private float threeUpAndDownX4, threeUpAndDownY4 = -700;
-    private float looper;
-
+    private float theSunMoonX, theSunMoonY;
+    private float myTimer;
 
     //score
     private int score;
@@ -100,7 +100,6 @@ public class testingGame extends AppCompatActivity {
     private boolean stopMovements = false;
     private boolean soundOffPressed = false;
     private boolean soundOnPressed = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +123,8 @@ public class testingGame extends AppCompatActivity {
         tapLabel = (TextView) findViewById(R.id.tapStart);
 
 
+        theSun = (ImageView) findViewById(R.id.theSun);
+        theMoon = (ImageView) findViewById(R.id.theMoon);
 
         soundOff = (ImageView) findViewById(R.id.soundOffButton);
         soundOn = (ImageView) findViewById(R.id.soundOnButton);
@@ -169,6 +170,10 @@ public class testingGame extends AppCompatActivity {
         score = getIntent().getIntExtra("SCORE", 0);
 
         //move out of screen/start pos
+        theSunMoonX=screenWidth;
+        theSunMoonY = screenHeight / 5.0f;
+
+
         cloud1X = -500;
         cloud2X = -700;
         cloud3X = -800;
@@ -199,20 +204,54 @@ public class testingGame extends AppCompatActivity {
 
     public void nighAndDay(){
 
+
         FrameLayout nightMode = findViewById(R.id.nightMode);
         FrameLayout dayMode = findViewById(R.id.dayMode);
-        looper++;
-        if(looper > 50){
-            nightMode.setVisibility(View.VISIBLE);
-            dayMode.setVisibility(View.GONE);
-        }
-        if(looper > 100){
-            nightMode.setVisibility(View.GONE);
-            dayMode.setVisibility(View.VISIBLE);
-            looper=0;
+
+        boolean timeDay = false;
+        boolean timeNight = false;
+
+        theSunMoonX -=0.3f;
+
+        if(theSunMoonX > (screenWidth/2.0f)){
+            theSunMoonY -=0.9f;
+            if(theSunMoonY<=0){
+                theSunMoonY =0;
+            }
         }
 
-        Log.d("LOOPER", "nighAndDay: " + looper);
+        if(theSunMoonX < (screenWidth/2.0f)-400){
+            theSunMoonY +=0.9f;
+        }
+
+        if(theSunMoonX < -200){
+            theSunMoonX = screenWidth;
+        }
+
+        myTimer++;
+        if(myTimer > 4500){
+            theMoon.setVisibility(View.VISIBLE);
+            theSun.setVisibility(View.GONE);
+            dayMode.setVisibility(View.GONE);
+            nightMode.setVisibility(View.VISIBLE);
+        }
+        if(myTimer > 9000){
+            theMoon.setVisibility(View.GONE);
+            theSun.setVisibility(View.VISIBLE);
+            dayMode.setVisibility(View.VISIBLE);
+            nightMode.setVisibility(View.GONE);
+            myTimer =0;
+        }
+
+
+
+        theSun.setX(theSunMoonX);
+        theSun.setY(theSunMoonY);
+        theMoon.setX(theSunMoonX);
+        theMoon.setY(theSunMoonY);
+
+
+        Log.d("myTimer", "myTimer: " + myTimer);
 
     }
 
@@ -243,7 +282,7 @@ public class testingGame extends AppCompatActivity {
     public void changePos(){
 
         hitCheck();
-        hitThreeBig();
+        //hitThreeBig();
         nighAndDay();
 
         if(stopMovements){
@@ -492,6 +531,7 @@ public class testingGame extends AppCompatActivity {
             threeUpAndDown2.setVisibility(View.VISIBLE);
             threeUpAndDown3.setVisibility(View.VISIBLE);
             threeUpAndDown4.setVisibility(View.VISIBLE);
+            theSun.setVisibility(View.VISIBLE);
 
             //FrameHeight
             FrameLayout frameLayout = findViewById(R.id.frame);

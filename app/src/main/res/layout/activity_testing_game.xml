@@ -13,7 +13,7 @@
         android:id="@+id/nightMode"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/backgroundnew5night"
+        android:background="@drawable/backgroundnew5night2"
         android:visibility="gone"
         android:foregroundGravity="center">
     </FrameLayout>
@@ -21,8 +21,9 @@
         android:id="@+id/dayMode"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/backgroundnew5"
+        android:background="@drawable/backgroundnew52"
         android:foregroundGravity="center">
+
     </FrameLayout>
 
 
@@ -30,6 +31,27 @@
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/theSun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/sun"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/theMoon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/moon"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/smallSpike"
@@ -149,6 +171,8 @@
             android:visibility="gone"
             app:srcCompat="@drawable/threeupanddown"
             tools:ignore="ContentDescription" />
+
+
 
 
     </FrameLayout>

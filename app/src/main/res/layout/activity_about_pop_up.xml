@@ -62,7 +62,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="125dp"
-            android:src="@drawable/treeupsidedown"
+            android:src="@drawable/treesymbol"
             tools:ignore="ContentDescription"
 
             />
