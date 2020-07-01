@@ -17,6 +17,9 @@
         android:visibility="gone"
         android:foregroundGravity="center">
     </FrameLayout>
+
+
+
     <FrameLayout
         android:id="@+id/dayMode"
         android:layout_width="match_parent"
@@ -26,12 +29,10 @@
 
     </FrameLayout>
 
-
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <ImageView
             android:id="@+id/theSun"
@@ -173,9 +174,10 @@
             tools:ignore="ContentDescription" />
 
 
-
-
     </FrameLayout>
+
+
+
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/banner1"

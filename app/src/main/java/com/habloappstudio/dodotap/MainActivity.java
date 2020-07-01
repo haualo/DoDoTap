@@ -18,10 +18,7 @@ public class MainActivity extends AppCompatActivity {
     public void startGame(View view) {
 
         startActivity(new Intent(MainActivity.this, testingGame.class));
-        /*
-       *  Intent intent = new Intent(this, testinGameOverPop.class);
-        startActivity(intent);
-        finish();*/
+
     }
 
     public void aboutPopUp(View view) {

@@ -1,10 +1,7 @@
 package com.habloappstudio.dodotap;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.media.MediaPlayer;
@@ -18,11 +15,9 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -80,7 +75,9 @@ public class testingGame extends AppCompatActivity {
     private float threeUpAndDownX2, threeUpAndDownY2 = -700;
     private float threeUpAndDownX3, threeUpAndDownY3 = -700;
     private float threeUpAndDownX4, threeUpAndDownY4 = -700;
-    private float theSunMoonX, theSunMoonY;
+    private float theSunMoonX;
+
+
     private float myTimer;
 
     //score
@@ -106,9 +103,9 @@ public class testingGame extends AppCompatActivity {
         setContentView(R.layout.activity_testing_game);
 
         //bannerAD code
-        myAdView = findViewById(R.id.banner1);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        myAdView.loadAd(adRequest);
+//        myAdView = findViewById(R.id.banner1);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        myAdView.loadAd(adRequest);
 
 
 
@@ -119,33 +116,32 @@ public class testingGame extends AppCompatActivity {
         crystalSound = MediaPlayer.create(this, R.raw.sfx_crystal);
         swooshSound = MediaPlayer.create(this, R.raw.sfx_swooshing);
 
-        scoreLabel = (TextView) findViewById(R.id.scoreText);
-        tapLabel = (TextView) findViewById(R.id.tapStart);
+        scoreLabel =  findViewById(R.id.scoreText);
+        tapLabel =  findViewById(R.id.tapStart);
 
 
-        theSun = (ImageView) findViewById(R.id.theSun);
-        theMoon = (ImageView) findViewById(R.id.theMoon);
+        theSun = findViewById(R.id.theSun);
+        theMoon = findViewById(R.id.theMoon);
 
-        soundOff = (ImageView) findViewById(R.id.soundOffButton);
-        soundOn = (ImageView) findViewById(R.id.soundOnButton);
+        soundOff = findViewById(R.id.soundOffButton);
+        soundOn = findViewById(R.id.soundOnButton);
 
-        threeUpAndDown = (ImageView) findViewById(R.id.threeupanddown);
-        threeUpAndDown2 = (ImageView) findViewById(R.id.threeupanddown2);
-        threeUpAndDown3 = (ImageView) findViewById(R.id.threeupanddown3);
-        threeUpAndDown4 = (ImageView) findViewById(R.id.threeupanddown4);
+        threeUpAndDown = findViewById(R.id.threeupanddown);
+        threeUpAndDown2 = findViewById(R.id.threeupanddown2);
+        threeUpAndDown3 = findViewById(R.id.threeupanddown3);
+        threeUpAndDown4 = findViewById(R.id.threeupanddown4);
 
+        thePlayer1 = findViewById(R.id.player1);
+        thePlayer2fly = findViewById(R.id.player2fly);
+        thePlayer2fall = findViewById(R.id.player2fall);
+        thePlayer3 = findViewById(R.id.player3);
 
-        thePlayer1 = (ImageView) findViewById(R.id.player1);
-        thePlayer2fly = (ImageView) findViewById(R.id.player2fly);
-        thePlayer2fall = (ImageView) findViewById(R.id.player2fall);
-        thePlayer3 = (ImageView) findViewById(R.id.player3);
+        spikeSmall = findViewById(R.id.smallSpike);
+        crystal = findViewById(R.id.crystalP);
 
-        spikeSmall = (ImageView) findViewById(R.id.smallSpike);
-        crystal = (ImageView) findViewById(R.id.crystalP);
-
-        cloud1 = (ImageView) findViewById(R.id.cloud1);
-        cloud2 = (ImageView) findViewById(R.id.cloud2);
-        cloud3 = (ImageView) findViewById(R.id.cloud3);
+        cloud1 = findViewById(R.id.cloud1);
+        cloud2 = findViewById(R.id.cloud2);
+        cloud3 = findViewById(R.id.cloud3);
 
         //Screen Size
         WindowManager windowManager = getWindowManager();
@@ -171,8 +167,6 @@ public class testingGame extends AppCompatActivity {
 
         //move out of screen/start pos
         theSunMoonX=screenWidth;
-        theSunMoonY = screenHeight / 5.0f;
-
 
         cloud1X = -500;
         cloud2X = -700;
@@ -198,6 +192,7 @@ public class testingGame extends AppCompatActivity {
         threeUpAndDownX4 = threeUpAndDownX;
         threeUpAndDown4.setY(threeUpAndDownY4);
 
+
         scoreLabel.setText("Score: " + score);
 
     }
@@ -208,22 +203,7 @@ public class testingGame extends AppCompatActivity {
         FrameLayout nightMode = findViewById(R.id.nightMode);
         FrameLayout dayMode = findViewById(R.id.dayMode);
 
-        boolean timeDay = false;
-        boolean timeNight = false;
-
-        theSunMoonX -=0.3f;
-
-        if(theSunMoonX > (screenWidth/2.0f)){
-            theSunMoonY -=0.9f;
-            if(theSunMoonY<=0){
-                theSunMoonY =0;
-            }
-        }
-
-        if(theSunMoonX < (screenWidth/2.0f)-400){
-            theSunMoonY +=0.9f;
-        }
-
+        theSunMoonX -=0.2f;
         if(theSunMoonX < -200){
             theSunMoonX = screenWidth;
         }
@@ -246,10 +226,7 @@ public class testingGame extends AppCompatActivity {
 
 
         theSun.setX(theSunMoonX);
-        theSun.setY(theSunMoonY);
         theMoon.setX(theSunMoonX);
-        theMoon.setY(theSunMoonY);
-
 
         Log.d("myTimer", "myTimer: " + myTimer);
 
@@ -278,6 +255,8 @@ public class testingGame extends AppCompatActivity {
 
 
     }
+
+
 
     public void changePos(){
 
@@ -335,16 +314,16 @@ public class testingGame extends AppCompatActivity {
 
             crystalX -=crystalSpeed;
             if(crystalX < -200){
-                crystalX = 1500;
-                crystalY = (int) Math.floor(Math.random() * ((1270) - 300)) + 300;
+                crystalX = screenWidth+100;
+                crystalY = (int) Math.floor(Math.random() * ((900) - 300)) + 300;
             }
             crystal.setX(crystalX);
             crystal.setY(crystalY);
 
             spikeSmallX -= spikeSpeed;
             if(spikeSmallX < -200){
-                spikeSmallX = 1200;
-                spikeSmallY = (int) Math.floor(Math.random() * ((1270) - 300)) + 300;
+                spikeSmallX = screenWidth +100;
+                spikeSmallY = (int) Math.floor(Math.random() * ((900) - 300)) + 300;
             }
             spikeSmall.setX(spikeSmallX);
             spikeSmall.setY(spikeSmallY);
@@ -532,6 +511,8 @@ public class testingGame extends AppCompatActivity {
             threeUpAndDown3.setVisibility(View.VISIBLE);
             threeUpAndDown4.setVisibility(View.VISIBLE);
             theSun.setVisibility(View.VISIBLE);
+            spikeSmall.setVisibility(View.VISIBLE);
+
 
             //FrameHeight
             FrameLayout frameLayout = findViewById(R.id.frame);
