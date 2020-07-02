@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 
@@ -57,7 +58,7 @@ public class testingGame extends AppCompatActivity {
 
 
     //bannerAd
-    private AdView myAdView;
+
 
     //Size
     private int screenHeight, screenWidth;
@@ -102,10 +103,13 @@ public class testingGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing_game);
 
+
+
         //bannerAD code
-//        myAdView = findViewById(R.id.banner1);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        myAdView.loadAd(adRequest);
+        AdView myAdView;
+        myAdView = findViewById(R.id.banner1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        myAdView.loadAd(adRequest);
 
 
 

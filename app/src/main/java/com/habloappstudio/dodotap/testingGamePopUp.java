@@ -29,6 +29,7 @@ public class testingGamePopUp extends AppCompatActivity {
     MediaPlayer dieSound;
 
 
+
     //reward ad
     private RewardedAd rewardedAd;
     private boolean check_press = false;
@@ -45,7 +46,7 @@ public class testingGamePopUp extends AppCompatActivity {
 
 
         ///Ad to continue
-        rewardedAd = new RewardedAd(this, "ca-app-pub-3940256099942544/5224354917");
+        rewardedAd = new RewardedAd(this, "ca-app-pub-6760992196528607/1721169493");
         RewardedAdLoadCallback callback = new RewardedAdLoadCallback(){
             @Override
             public void onRewardedAdFailedToLoad(int i) {
