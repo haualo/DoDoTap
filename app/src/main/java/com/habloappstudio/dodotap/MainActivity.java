@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(this, "ca-app-pub-6760992196528607~4331020967");
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
+
             public void onInitializationComplete(InitializationStatus initializationStatus) {
+                Log.d("initializationStatus", "Complete: MainActivity ");
+
             }
         });
 
@@ -36,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         myAdView.loadAd(adRequest);
 
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     public void startGame(View view) {

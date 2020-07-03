@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
@@ -44,7 +47,14 @@ public class testingGamePopUp extends AppCompatActivity {
         dieSound = MediaPlayer.create(this, R.raw.sfx_die);
         dieSound.start();
 
+        MobileAds.initialize(this, "ca-app-pub-6760992196528607~4331020967");
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
 
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                Log.d("initializationStatus", "Complete: testingGamePopUp ");
+
+            }
+        });
         ///Ad to continue
         rewardedAd = new RewardedAd(this, "ca-app-pub-6760992196528607/1721169493");
         RewardedAdLoadCallback callback = new RewardedAdLoadCallback(){
