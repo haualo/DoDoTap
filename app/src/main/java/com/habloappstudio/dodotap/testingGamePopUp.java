@@ -47,7 +47,7 @@ public class testingGamePopUp extends AppCompatActivity {
         dieSound = MediaPlayer.create(this, R.raw.sfx_die);
         dieSound.start();
 
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this, "ca-app-pub-6760992196528607~4331020967");
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
 
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -56,7 +56,7 @@ public class testingGamePopUp extends AppCompatActivity {
             }
         });
         ///Ad to continue
-        rewardedAd = new RewardedAd(this, "ca-app-pub-3940256099942544/5224354917");
+        rewardedAd = new RewardedAd(this, "ca-app-pub-6760992196528607/1721169493");
         RewardedAdLoadCallback callback = new RewardedAdLoadCallback(){
             @Override
             public void onRewardedAdFailedToLoad(int i) {

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         AppLovinSdk.initializeSdk(this);
 
         //google
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this, "ca-app-pub-6760992196528607~4331020967");
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
 
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
+
         //bannerAD code
         AdView myAdView;
         myAdView = findViewById(R.id.bannerMain);
         AdRequest adRequest = new AdRequest.Builder().build();
         myAdView.loadAd(adRequest);
-        */
+
     }
 
     @Override
