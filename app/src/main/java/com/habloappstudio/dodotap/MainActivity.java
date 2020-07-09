@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.applovin.sdk.AppLovinSdk;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -24,7 +25,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(this, "ca-app-pub-6760992196528607~4331020967");
+        //Initialize ads
+
+
+        //appLovin
+        AppLovinSdk.initializeSdk(this);
+
+        //google
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
 
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -33,12 +41,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
         //bannerAD code
         AdView myAdView;
         myAdView = findViewById(R.id.bannerMain);
         AdRequest adRequest = new AdRequest.Builder().build();
         myAdView.loadAd(adRequest);
-
+        */
     }
 
     @Override
